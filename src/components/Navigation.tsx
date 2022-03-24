@@ -1,4 +1,6 @@
 import React from "react";
+import OAuthButton from "./OAuthButton";
+import DiscordAvatar from "./DiscordAvatar";
 
 function Navigation() {
     return (
@@ -18,16 +20,11 @@ function Navigation() {
                     ['Players', '/players'],
                     ['Schedule', '/schedule'],
                 ].map(([title, url]) => (
-                    <a href={url} className="rounded-lg px-3 py-2 text-stone-500 dark:text-stone-300 font-medium hover:bg-stone-400 hover:text-stone-900">{title}</a>
+                    <a href={url} key={title} className="rounded-lg px-3 py-2 text-stone-500 dark:text-stone-300 font-medium hover:bg-stone-400 hover:text-stone-900">{title}</a>
                 ))}
             </div>
             <div className="flex flex-none px-3">
-                <div className="flex relative h-10 w-10 bg-stone-300 dark:bg-stone-400 rounded-full">
-                    {/*<img className="inline-block mx-auto h-10 w-10 rounded-full sm:mx-0 sm:shrink-0 bg-stone-300" src="" alt="" />
-                    */}
-                    <span className="flex-auto font-medium text-xs text-center py-3">Profile</span>
-                    <span className="absolute rounded-full h-3 w-3 bottom-0 right-0 bg-green-500"></span>
-                </div>
+                { sessionStorage.getItem('discord-token') === null ? <OAuthButton /> : <DiscordAvatar /> }
             </div>
         </nav>
     );
