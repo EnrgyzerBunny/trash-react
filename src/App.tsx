@@ -1,14 +1,13 @@
 import React from 'react';
 import './App.css';
-import AuthExample from './pages/AuthExample';
-import Homepage from './pages/Homepage';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
+import RoutingTable from './RoutingTable';
 
 function App() {
   
   return (
     <BrowserRouter>
-      <Homepage />
+      <RoutingTable />
     </BrowserRouter>
   );
 }

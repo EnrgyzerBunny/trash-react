@@ -1,25 +1,36 @@
-import React from 'react';
-import Navigation from '../components/Navigation';
+import React, { useState } from 'react';
+import PageWrapper from '../components/PageWrapper';
 import WinnerBanner from '../components/WinnerBanner';
 import ContentPanel from '../components/ContentPanel';
-import ODRecentProMatches from '../components/ODRecentProMatches';
-import OAuthButton from '../components/OAuthButton';
 
 function Homepage() {
+    const [classTrans, setClassTrans] = useState("col-start-3 col-end-7 flex flex-col");
+    const [styleTrans, setStyleTrans]: any = useState({});
+
+    const dismissCallback = (height: number) => {
+        setClassTrans("col-start-3 col-end-7 flex flex-col transition ease-in-out duration-700");
+        const newStyle = {
+            "--tw-translate-y": "-" + height + "px",
+            "transform": "translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))"
+        };
+        setStyleTrans(newStyle);
+    };
+
+    const reset = () => {
+        setClassTrans("col-start-3 col-end-7 flex flex-col");
+        setStyleTrans({});
+        console.log("reset");
+    };
+
     return (
-        <div className="min-w-screen min-h-screen max-h-full bg-fixed bg-gradient-to-b from-stone-100 to-stone-500 dark:from-stone-500 dark:to-stone-700">
-            <header className="sticky top-0 z-50">
-            <Navigation />
-            </header>
-            <main className="relative xl:grid xl:grid-cols-8">
-                <WinnerBanner season="4" team="Bennie and the Slants"/>
+        <PageWrapper>
+            <WinnerBanner season="4" team="Bennie and the Slants" onDismiss={dismissCallback} onFinish={reset} />
+            <div style={styleTrans} className={classTrans}>
                 <ContentPanel>
-                    {/*}<ODRecentProMatches />
-                    { */}
+                    Homepage
                 </ContentPanel>
-                
-            </main>
-        </div>
+            </div>
+        </PageWrapper>
     );
 }
 
