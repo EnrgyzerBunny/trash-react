@@ -19,7 +19,6 @@ function Homepage() {
     const reset = () => {
         setClassTrans("col-start-3 col-end-7 flex flex-col");
         setStyleTrans({});
-        console.log("reset");
     };
 
     return (

@@ -2,6 +2,7 @@ import React from "react";
 import Navigation from "./Navigation";
 
 function PageWrapper(props: any) {
+
     return (
         <div className="flex flex-col min-w-fit min-h-screen bg-fixed bg-gradient-to-b from-stone-100 to-stone-500 dark:from-stone-500 dark:to-stone-700">
             <header className="sticky top-0 z-50">
