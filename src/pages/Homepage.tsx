@@ -27,7 +27,6 @@ function Homepage() {
             <WinnerBanner season="4" team="Bennie and the Slants" onDismiss={dismissCallback} onFinish={reset} />
             <div style={styleTrans} className={classTrans}>
                 <ContentPanel>
-                    Teams:
                     <TeamsTable />
                 </ContentPanel>
             </div>

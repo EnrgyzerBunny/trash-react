@@ -34,13 +34,24 @@ function TeamsTable() {
         return <div>Loading...</div>;
     } else {
         return (
-            <ul>
-                {items.map((item: Team) => (
-                    <li key={item.TeamID}>
-                        {item.TeamName}
-                    </li>
-                ))}
-            </ul>
+            <>
+                <table className="flex-auto table-auto border-collapse border border-stone-500">
+                    <thead>
+                        <tr>
+                            <th className="border border-stone-600 bg-stone-600">Team</th>
+                            <th className="border border-stone-600 bg-stone-600">Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {items.map((item: Team) => (
+                            <tr>
+                                <td key={item.TeamID} className="border px-4 py-2 border-stone-600 font-normal">{item.TeamName}</td>
+                                <td key={item.TeamID} className="border px-4 py-2 border-stone-600 font-normal text-right">0</td>                        
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </>
         );
     }
 
