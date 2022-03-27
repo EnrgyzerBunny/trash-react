@@ -9,15 +9,15 @@ function Navigation() {
     const navItems = IsAuth()? 
     [ //if auth
         ['Home', '/'],
-        ['Team', '/team'],
+        //['Team', '/team'],
         ['Players', '/players'],
-        ['Schedule', '/schedule'],
+        //['Schedule', '/schedule'],
     ]
     :
     [ //if unauth
         ['Home', '/'],
         ['Players', '/players'],
-        ['Schedule', '/schedule'],
+        //['Schedule', '/schedule'],
     ];
 
     return (

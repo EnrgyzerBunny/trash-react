@@ -24,7 +24,7 @@ export default function RoutingTable() {
               </RequireAuth>
             }
           />
-          <Route path="/teams*" element={<TeamsPage />} />
+          <Route path="/teams/*" element={<TeamsPage />} />
           <Route path="/players" element={<PlayersPage />} />
           <Route path="/oauth-callback" element={<AuthCallback />} />
           <Route path="/*" element={<NotFound />} />

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 type Team =
     {
@@ -45,8 +46,12 @@ function TeamsTable() {
                     <tbody>
                         {items.map((item: Team) => (
                             <tr>
-                                <td key={item.TeamID} className="border px-4 py-2 border-stone-600 font-normal">{item.TeamName}</td>
-                                <td key={item.TeamID} className="border px-4 py-2 border-stone-600 font-normal text-right">0</td>                        
+                                <td key={item.TeamID} className="border px-4 py-2 border-stone-600 font-normal">
+                                    <Link to={"/teams/" + item.TeamID}>
+                                        {item.TeamName}
+                                    </Link>
+                                </td>
+                                <td key={item.TeamID} className="border px-4 py-2 border-stone-600 font-normal text-right">0</td>
                             </tr>
                         ))}
                     </tbody>
