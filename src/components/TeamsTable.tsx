@@ -36,7 +36,7 @@ function TeamsTable() {
     } else {
         return (
             <>
-                <table className="flex-auto table-auto border-collapse border border-stone-500">
+                <table className="flex-auto shadow-lg table-auto border-collapse border border-stone-500">
                     <thead>
                         <tr>
                             <th className="border border-stone-600 bg-stone-600">Team</th>
@@ -46,12 +46,12 @@ function TeamsTable() {
                     <tbody>
                         {items.map((item: Team) => (
                             <tr>
-                                <td key={item.TeamID} className="border px-4 py-2 border-stone-600 font-normal">
+                                <td key={item.TeamID} className="border px-4 py-2 text-stone-200 border-stone-600 bg-stone-400 dark:bg-stone-500 font-normal">
                                     <Link to={"/teams/" + item.TeamID}>
                                         {item.TeamName}
                                     </Link>
                                 </td>
-                                <td key={item.TeamID} className="border px-4 py-2 border-stone-600 font-normal text-right">0</td>
+                                <td key={item.TeamID} className="border px-4 py-2 text-stone-200 border-stone-600 bg-stone-400 dark:bg-stone-500 font-normal text-right">0</td>
                             </tr>
                         ))}
                     </tbody>

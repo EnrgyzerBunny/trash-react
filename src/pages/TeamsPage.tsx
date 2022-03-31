@@ -66,7 +66,7 @@ function TeamDetails() {
                     setError(error);
                 }
             )
-    }, [])
+    }, [id])
 
     if (error) {
         return <div>Error: {error.message}</div>;
@@ -94,7 +94,7 @@ function TeamDetails() {
                                 </thead>
                                 <tbody>
                                     {items.map((item: RosterListing) => (
-                                        (item.PlayStatus == 1) ?
+                                        (item.PlayStatus === 1) ?
                                             <tr key={"row" + item.PlayerID}>
                                                 <td key={"name" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal">{item.PlayerName}</td>
                                                 <td key={"team" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal">{item.ProTeamName}</td>
@@ -118,7 +118,7 @@ function TeamDetails() {
                                 </thead>
                                 <tbody>
                                     {items.map((item: RosterListing) => (
-                                        (item.PlayStatus == 0) ?
+                                        (item.PlayStatus === 0) ?
                                             <tr key={"row" + item.PlayerID}>
                                                 <td key={"name" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal">{item.PlayerName}</td>
                                                 <td key={"team" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal">{item.ProTeamName}</td>
