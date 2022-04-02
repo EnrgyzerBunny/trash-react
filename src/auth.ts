@@ -26,7 +26,7 @@ function GetUser(callback: any) {
                 (error) => {
                     callback(null);
                 }
-            )
+            );
     }
     else if (sessionStorage.getItem('discord-user') !== null)
     {

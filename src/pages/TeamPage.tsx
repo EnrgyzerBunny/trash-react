@@ -1,104 +1,161 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import ContentPanel from "../components/ContentPanel";
 import PageWrapper from "../components/PageWrapper";
 import { Switch, Dialog, Transition } from '@headlessui/react'
+import { Console } from "console";
+
+type RosterListing = {
+    TeamName: string,
+    ProTeamName: string,
+    ProTeamTag: string,
+    PlayerID: number,
+    PlayerName: string,
+    AccountID: string,
+    FantasyRole: number,
+    PlayStatus: number
+};
 
 function TeamPage() {
     const [enabled, setEnabled] = useState(false);
     let [isOpen, setIsOpen] = useState(false);
+
+    const [error, setError]: any = useState(null);
+    const [isLoaded, setIsLoaded]: any = useState(false);
+    const [items, setItems]: any = useState([]);
+    const [teamName, setTeamName]: any = useState(null);
 
     const closeModal = () => {
         setEnabled(false);
         setIsOpen(false);
     };
 
-    return (
-        <PageWrapper>
-            <div className="col-start-3 col-end-7 flex flex-col">
-                <ContentPanel>
-                    <div className="">Manage Team</div>
-                    <div className="flex">
-                        <div className="flex-auto"></div>
-                        <div className="flex-none font-normal px-4">This switch pops an error</div>
-                        <Switch
-                            checked={enabled}
-                            onChange={() => { setEnabled(!enabled); (!enabled) && setIsOpen(!enabled); }}
-                            className={`${enabled ? 'bg-lime-700 opacity-100' : 'bg-stone-700 opacity-40'
-                                } relative inline-flex items-center h-6 rounded-full w-11 transition ease-in-out duration-500 my-1`}
-                        >
-                            <span className="sr-only">Activate Player</span>
-                            <span
-                                className={`${enabled ? 'translate-x-6' : 'translate-x-1'
-                                    } inline-block w-4 h-4 transform bg-stone-100 rounded-full transition ease-in-out duration-500`}
-                            />
-                        </Switch>
-                    </div>
-                    <Transition appear show={isOpen} as={Fragment}>
-                        <Dialog
-                            as="div"
-                            className="fixed inset-0 z-10 overflow-y-auto"
-                            onClose={closeModal}
-                        >
-                            <div className="min-h-screen px-4 text-center">
-                                <Transition.Child
-                                    as={Fragment}
-                                    enter="ease-out duration-300"
-                                    enterFrom="opacity-0"
-                                    enterTo="opacity-100"
-                                    leave="ease-in duration-200"
-                                    leaveFrom="opacity-100"
-                                    leaveTo="opacity-0"
-                                >
-                                    <Dialog.Overlay className="fixed inset-0" />
-                                </Transition.Child>
+    const name = JSON.parse(sessionStorage.getItem('discord-user')!).id;
 
-                                {/* This element is to trick the browser into centering the modal contents. */}
-                                <span
-                                    className="inline-block h-screen align-middle"
-                                    aria-hidden="true"
-                                >
-                                    &#8203;
-                                </span>
-                                <Transition.Child
-                                    as={Fragment}
-                                    enter="ease-out duration-300"
-                                    enterFrom="opacity-0 scale-95"
-                                    enterTo="opacity-100 scale-100"
-                                    leave="ease-in duration-200"
-                                    leaveFrom="opacity-100 scale-100"
-                                    leaveTo="opacity-0 scale-95"
-                                >
-                                    <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                                        <Dialog.Title
-                                            as="h3"
-                                            className="text-lg font-medium leading-6 text-gray-900"
-                                        >
-                                            Error
-                                        </Dialog.Title>
-                                        <div className="mt-2">
-                                            <p className="text-sm text-gray-500">
-                                                You can't flip this switch
-                                            </p>
-                                        </div>
+    const Role = (roleId: number) => {
+        switch (roleId) {
+            case 1:
+                return "Core";
+            case 2:
+                return "Support";
+            case 4:
+                return "Offlane";
+            default:
+                return "Unknown";
+        }
+    };
 
-                                        <div className="mt-4">
-                                            <button
-                                                type="button"
-                                                className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                                                onClick={closeModal}
-                                            >
-                                                Close
-                                            </button>
-                                        </div>
-                                    </div>
-                                </Transition.Child>
-                            </div>
-                        </Dialog>
-                    </Transition>
-                </ContentPanel>
-            </div>
-        </PageWrapper>
-    );
+    const SetPlayStatus = (playerId: number, playStatus: number) => {
+        
+        let token = JSON.parse(sessionStorage.getItem('discord-token')!);
+        let head = new Headers();
+        head.append('Authorization', 'Bearer ' + token.access_token);
+        head.append('id', name);
+
+        const init = {
+            method: 'POST',
+            headers: head,
+        };
+
+        fetch("https://sea.ddns.net/api/playstatus?player=" + playerId + "&playstatus=" + playStatus, init)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    //console.log(playerId + " set to " + playStatus);
+                },
+                (error) => {
+                    console.log("err: " + error);
+                }
+            );
+    };
+
+    const UpdateInline = (index: number, playStatus: number) => {
+        items[index].PlayStatus = playStatus;
+        setItems([...items]);
+    };
+
+    const ActivateSwitch = (index:number) => {
+
+        return (
+            <Switch
+                checked={items[index].PlayStatus == 1}
+                onChange={() => { let newStatus = (items[index].PlayStatus == 0) ? 1 : 0; SetPlayStatus(items[index].PlayerID, newStatus); UpdateInline(index, newStatus); }}
+                className={`${items[index].PlayStatus == 1 ? 'bg-lime-700 opacity-100' : 'bg-stone-700 opacity-40'
+                    } relative inline-flex items-center h-6 rounded-full w-11 transition ease-in-out duration-500 my-1`}
+            >
+                <span className="sr-only">Activate Player</span>
+                <span
+                    className={`${items[index].PlayStatus == 1 ? 'translate-x-6' : 'translate-x-1'
+                        } inline-block w-4 h-4 transform bg-stone-100 rounded-full transition ease-in-out duration-500`}
+                />
+            </Switch>
+        );
+    };
+
+
+
+
+    useEffect(() => {
+
+        fetch("https://sea.ddns.net/api/roster?name=" + name)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setItems(result);
+                    result.sort((a: RosterListing, b: RosterListing) => { return a.FantasyRole - b.FantasyRole; })
+                    if (result.length > 0) {
+                        setTeamName(result[0].TeamName);
+                    }
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
+    }, [name]);
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+        return <div>Loading...</div>;
+    } else {
+        return (
+            
+            <PageWrapper>
+                <div className="col-start-3 col-end-7 flex flex-col">
+                    <ContentPanel>
+                        <div className="">Manage Team - {teamName}</div>
+                        <div className="flex-auto py-4">
+                            Players:
+                        </div>
+                        <table className="flex-auto table-fixed border-collapse border border-stone-500">
+                            <thead>
+                                <tr>
+                                    <th className="w-2/6 border border-stone-600 bg-stone-600">Player</th>
+                                    <th className="w-2/6 border border-stone-600 bg-stone-600">Team</th>
+                                    <th className="w-1/6 border border-stone-600 bg-stone-600">Role</th>
+                                    <th className="w-1/6 border border-stone-600 bg-stone-600">Playing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {items.map((item: RosterListing, index:number) =>
+                                    <tr key={"row" + item.PlayerID}>
+                                        <td key={"name" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal">{item.PlayerName}</td>
+                                        <td key={"team" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal">{item.ProTeamName}</td>
+                                        <td key={"role" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal">{Role(item.FantasyRole)}</td>
+                                        <td key={"active" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal">{(isLoaded) ? ActivateSwitch(index) : null}</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </ContentPanel>
+                </div>
+            </PageWrapper>
+        );
+    }
+
+
+
 }
 
 export default TeamPage;
