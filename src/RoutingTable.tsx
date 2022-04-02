@@ -10,6 +10,7 @@ import { IsAuth, GetUser } from "./auth";
 import Homepage from "./pages/Homepage";
 import PlayersPage from "./pages/PlayersPage";
 import TeamsPage from "./pages/TeamsPage";
+import TeamPage from "./pages/TeamPage";
 
 export default function RoutingTable() {
   return (
@@ -20,7 +21,7 @@ export default function RoutingTable() {
             path="/team"
             element={
               <RequireAuth>
-                <ProtectedPage />
+                <TeamPage />
               </RequireAuth>
             }
           />
@@ -73,10 +74,6 @@ function RequireAuth({ children }: { children: JSX.Element }) {
   }
 
   return children;
-}
-
-function ProtectedPage() {
-  return <div><h3>Protected</h3></div>;
 }
 
 function NotFound()
