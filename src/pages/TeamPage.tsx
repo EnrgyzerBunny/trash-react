@@ -1,8 +1,7 @@
 import React, { useState, Fragment, useEffect } from "react";
 import ContentPanel from "../components/ContentPanel";
 import PageWrapper from "../components/PageWrapper";
-import { Switch, Dialog, Transition } from '@headlessui/react'
-import { Console } from "console";
+import { Switch } from '@headlessui/react';
 import GlobalModal from "../components/GlobalModal";
 
 type RosterListing = {
@@ -23,6 +22,7 @@ function TeamPage() {
     const [items, setItems]: any = useState([]);
     const [teamName, setTeamName]: any = useState(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [isLocked, setIsLocked] = useState(true);
 
     const name = JSON.parse(sessionStorage.getItem('discord-user')!).id;
 
@@ -60,7 +60,7 @@ function TeamPage() {
             .then(res => {
                 if (!res.ok) {
                     console.log(res);
-                    if (res.status == 401) {
+                    if (res.status === 401) {
                         setError(res.status + "-" + res.statusText + ": Token may have expired, please refresh login.");
                     }
                     else
@@ -73,7 +73,7 @@ function TeamPage() {
             })
             .then(
                 (result) => {
-                    if (result.changedRows != null && result.changedRows == 1) {
+                    if (result.changedRows != null && result.changedRows === 1) {
                         console.log(playerId + " set to " + playStatus);
                     }
                 },
@@ -94,14 +94,14 @@ function TeamPage() {
             <div className="flex">
                 <div className="flex-auto"></div>
                 <Switch
-                    checked={items[index].PlayStatus == 1}
-                    onChange={() => { let newStatus = (items[index].PlayStatus == 0) ? 1 : 0; let currentStatus = items[index].PlayStatus; UpdateInline(index, newStatus); SetPlayStatus(items[index].PlayerID, newStatus, () => { UpdateInline(index, currentStatus); }); }}
-                    className={`${items[index].PlayStatus == 1 ? 'bg-lime-700 opacity-100' : 'bg-stone-700 opacity-40'
-                        } relative inline-flex items-center h-6 rounded-full w-11 transition ease-in-out duration-500 my-1`}
+                    checked={items[index].PlayStatus === 1}
+                    onChange={() => { let newStatus = (items[index].PlayStatus === 0) ? 1 : 0; let currentStatus = items[index].PlayStatus; UpdateInline(index, newStatus); SetPlayStatus(items[index].PlayerID, newStatus, () => { UpdateInline(index, currentStatus); }); }}
+                    className={`${items[index].PlayStatus === 1 ? 'bg-lime-700 opacity-100 shadow-lg' : 'bg-stone-700 opacity-40'
+                        } relative inline-flex items-center h-6 rounded-full w-11 transition ease-in-out duration-500 my-1 `}
                 >
                     <span className="sr-only">Activate Player</span>
                     <span
-                        className={`${items[index].PlayStatus == 1 ? 'translate-x-6' : 'translate-x-1'
+                        className={`${items[index].PlayStatus === 1 ? 'translate-x-6' : 'translate-x-1'
                             } inline-block w-4 h-4 transform bg-stone-100 rounded-full transition ease-in-out duration-500`}
                     />
                 </Switch>
@@ -155,13 +155,13 @@ function TeamPage() {
                             <div className="flex-auto py-4">
                                 Players:
                             </div>
-                            <table className="flex-auto table-fixed border-collapse border border-stone-500">
+                            <table className="flex-auto shadow-lg table-fixed border-collapse border border-stone-500">
                                 <thead>
                                     <tr>
-                                        <th className="w-2/6 border border-stone-600 bg-stone-600">Player</th>
-                                        <th className="w-2/6 border border-stone-600 bg-stone-600">Team</th>
-                                        <th className="w-1/6 border border-stone-600 bg-stone-600">Role</th>
-                                        <th className="w-1/6 border border-stone-600 bg-stone-600">Playing</th>
+                                        <th className="w-2/6 border border-stone-600 bg-stone-600 text-stone-50">Player</th>
+                                        <th className="w-2/6 border border-stone-600 bg-stone-600 text-stone-50">Team</th>
+                                        <th className="w-1/6 border border-stone-600 bg-stone-600 text-stone-50">Role</th>
+                                        <th className="w-1/6 border border-stone-600 bg-stone-600 text-stone-50">Playing</th>
                                     </tr>
                                 </thead>
                                 <tbody>
