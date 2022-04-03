@@ -45,13 +45,13 @@ function TeamsTable() {
                     </thead>
                     <tbody>
                         {items.map((item: Team) => (
-                            <tr>
-                                <td key={item.TeamID} className="border px-4 py-2 text-stone-200 border-stone-600 bg-stone-400 dark:bg-stone-500 font-normal">
+                            <tr key={ item.TeamID}>
+                                <td key={"name" + item.TeamID} className="border px-4 py-2 text-stone-200 border-stone-600 bg-stone-400 dark:bg-stone-500 font-normal">
                                     <Link to={"/teams/" + item.TeamID}>
                                         {item.TeamName}
                                     </Link>
                                 </td>
-                                <td key={item.TeamID} className="border px-4 py-2 text-stone-200 border-stone-600 bg-stone-400 dark:bg-stone-500 font-normal text-right">0</td>
+                                <td key={"points" + item.TeamID} className="border px-4 py-2 text-stone-200 border-stone-600 bg-stone-400 dark:bg-stone-500 font-normal text-right">0</td>
                             </tr>
                         ))}
                     </tbody>
