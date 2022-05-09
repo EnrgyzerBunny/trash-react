@@ -44,6 +44,23 @@ function TeamPage() {
         setItems([...items]);
     };
 
+    const GetRolePlayCount = (role: number) => {
+        return items.filter((x: RosterListing) => x.PlayStatus === 1 && x.FantasyRole === role).length;
+    };
+
+    const IsAtLimit = (role: number) => {
+        switch(role) {
+            case 1:
+                return GetRolePlayCount(role) >= 2;
+            case 2:
+                return GetRolePlayCount(role) >= 2;
+            case 4:
+                return GetRolePlayCount(role) >= 1;
+            default:
+                return false;
+        }
+    };
+
     const SetPlayStatus = (playerId: number, playStatus: number, revertCallback: any) => {
 
         let token = JSON.parse(sessionStorage.getItem('discord-token')!);
@@ -93,11 +110,12 @@ function TeamPage() {
         return (
             <div className="flex">
                 <div className="flex-auto"></div>
-                <Switch
+                <Switch disabled={IsAtLimit(items[index].FantasyRole) && items[index].PlayStatus === 0}
                     checked={items[index].PlayStatus === 1}
                     onChange={() => { let newStatus = (items[index].PlayStatus === 0) ? 1 : 0; let currentStatus = items[index].PlayStatus; UpdateInline(index, newStatus); SetPlayStatus(items[index].PlayerID, newStatus, () => { UpdateInline(index, currentStatus); }); }}
                     className={`${items[index].PlayStatus === 1 ? 'bg-lime-700 opacity-100 shadow-lg' : 'bg-stone-700 opacity-40'
-                        } relative inline-flex items-center h-6 rounded-full w-11 transition ease-in-out duration-500 my-1 `}
+                        } relative inline-flex items-center h-6 rounded-full w-11 transition ease-in-out duration-500 my-1 ${IsAtLimit(items[index].FantasyRole) && items[index].PlayStatus === 0 ? 'invisible' : 'visible'
+                    }`}
                 >
                     <span className="sr-only">Activate Player</span>
                     <span
