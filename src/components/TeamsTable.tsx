@@ -15,7 +15,7 @@ function TeamsTable() {
     const [items, setItems]: any = useState([]);
 
     useEffect(() => {
-        fetch("https://sea.ddns.net/api/teams?season=3")
+        fetch("https://sea.ddns.net/api/teams?season=4")
             .then(res => res.json())
             .then(
                 (result) => {

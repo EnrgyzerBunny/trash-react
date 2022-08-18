@@ -3,6 +3,7 @@ import PageWrapper from '../components/PageWrapper';
 import WinnerBanner from '../components/WinnerBanner';
 import ContentPanel from '../components/ContentPanel';
 import TeamsTable from '../components/TeamsTable';
+import FeaturedPlayer from '../components/FeaturedPlayer';
 
 function Homepage() {
     const [classTrans, setClassTrans] = useState("col-start-3 col-end-7 flex flex-col");
@@ -26,6 +27,7 @@ function Homepage() {
         <PageWrapper>
             <WinnerBanner season="4" team="Bennie and the Slants" onDismiss={dismissCallback} onFinish={reset} />
             <div style={styleTrans} className={classTrans}>
+                <FeaturedPlayer/>
                 <ContentPanel>
                     <TeamsTable />
                 </ContentPanel>
