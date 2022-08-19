@@ -9,6 +9,7 @@ import { IsAuth, GetUser } from "./auth";
 
 import Homepage from "./pages/Homepage";
 import PlayersPage from "./pages/PlayersPage";
+import PlayerPage from "./pages/PlayerPage";
 import TeamsPage from "./pages/TeamsPage";
 import TeamPage from "./pages/TeamPage";
 
@@ -27,6 +28,7 @@ export default function RoutingTable() {
           />
           <Route path="/teams/*" element={<TeamsPage />} />
           <Route path="/players" element={<PlayersPage />} />
+          <Route path="/player/*" element={<PlayerPage />} />
           <Route path="/oauth-callback" element={<AuthCallback />} />
           <Route path="/*" element={<NotFound />} />
       </Routes>

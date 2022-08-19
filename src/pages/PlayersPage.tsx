@@ -63,7 +63,7 @@ function PlayersPage() {
                     setIsLoaded(true);
                     result.sort((a: any, b: any) => {
                         if (a.ProTeamID === b.ProTeamID) {
-                            return a.PlayerID - b.PlayerID;
+                            return a.FantasyRole > b.FantasyRole ? 1 : -1;
                         }
 
                         return a.ProTeamID > b.ProTeamID ? 1 : -1;
@@ -100,7 +100,7 @@ function PlayersPage() {
                     </thead>
                     <tbody>
                         {items.map((item: RosterListing) => (
-                            (!freeAgents || item.FantasyTeamID == 0) ?
+                            (!freeAgents || item.FantasyTeamID === 0) ?
                                 <tr key={"row" + item.PlayerID}>
                                     <td key={"name" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal"><Link to={"/player/" + item.PlayerID}>{item.PlayerName}</Link></td>
                                     <td key={"team" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal">{item.ProTeamName}</td>
