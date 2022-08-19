@@ -12,7 +12,7 @@ function FeaturedPlayer(props: any) {
     const [isLoaded, setIsLoaded]: any = useState(false);
     const [playerImg, setPlayerImg]: any = useState(null);
 
-    var ran = new seedrandom(new Date().toISOString().slice(0, 10));
+    
 
     const Role = (roleId: number) => {
         switch (roleId) {
@@ -36,6 +36,7 @@ function FeaturedPlayer(props: any) {
                     setIsLoaded(true);
 
                     if (result.length > 0) {
+                        var ran = new seedrandom(new Date().toISOString().slice(0, 10));
                         var index = Math.round(ran.quick() * result.length);
                         setPlayer(result[index]);
                         setPlayerImg("https://cdn.cloudflare.steamstatic.com/apps/dota2/players/" + result[index].AccountID + ".png");
@@ -47,7 +48,7 @@ function FeaturedPlayer(props: any) {
                     setError(error.message);
                 }
             )
-    }, [ran]);
+    }, []);
 
     if (error) {
         return <ContentPanel><div>Error: {error.message}</div></ContentPanel>;
