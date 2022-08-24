@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import OAuth2Login from 'react-simple-oauth2-login';
 
-const prodUri = "http://sea.ddns.net/oauth-callback";
+const prodUri = "http://dotafantasy.com/oauth-callback";
 const devUri = "http://localhost:3000/oauth-callback";
 
 function OAuthButton() {

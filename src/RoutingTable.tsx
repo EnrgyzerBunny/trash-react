@@ -12,8 +12,11 @@ import PlayersPage from "./pages/PlayersPage";
 import PlayerPage from "./pages/PlayerPage";
 import TeamsPage from "./pages/TeamsPage";
 import TeamPage from "./pages/TeamPage";
+import { usePageTracking } from "./reportWebVitals";
 
 export default function RoutingTable() {
+
+  usePageTracking();
   return (
     <AuthProvider>
       <Routes>
