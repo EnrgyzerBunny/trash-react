@@ -7,7 +7,7 @@ const seedrandom = require('seedrandom');
 
 function FeaturedPlayer(props: any) {
     const [player, setPlayer]: any = useState({});
-    const [freeAgents, setFreeAgents] = useState(false);
+    //const [freeAgents, setFreeAgents] = useState(false);
     const [error, setError]: any = useState(null);
     const [isLoaded, setIsLoaded]: any = useState(false);
     const [playerImg, setPlayerImg]: any = useState(null);

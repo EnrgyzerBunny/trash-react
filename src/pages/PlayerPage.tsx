@@ -30,7 +30,7 @@ function PlayerPage() {
         </Routes>
     );
 };
-//TODO: API call pulls info but page displays in teams page format - needs to be updated
+
 //DB player url: https://www.dotabuff.com/esports/players/<id>
 //OD player url: https://www.opendota.com/players/<id>
 //Dota2 esports page play imgs: https://cdn.cloudflare.steamstatic.com/apps/dota2/players/<id>.png
@@ -138,9 +138,7 @@ function PlayerDetails() {
                                         </table>
                                     </td>
                                 </tr>
-
                             </table>
-
                         </div>
                     </ContentPanel>
                 </div>
