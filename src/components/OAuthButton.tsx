@@ -6,7 +6,7 @@ const devUri = "http://localhost:3000/oauth-callback";
 
 function OAuthButton() {
     const [error, setError] = useState(null);
-    const onSuccess = (access_token: any) => { sessionStorage.setItem('discord-token', JSON.stringify(access_token)); window.location.reload();};
+    const onSuccess = (access_token: any) => { localStorage.setItem('discord-token', JSON.stringify(access_token)); window.location.reload();};
 
     return (
         <div className="flex space-x-2 px-2 py-2 rounded-lg group-hover:bg-stone-400">

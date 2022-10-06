@@ -36,7 +36,7 @@ function Navigation() {
                 ))}
             </div>
             <div className="flex flex-none px-3 group">
-                { sessionStorage.getItem('discord-token') === null ? <OAuthButton /> : <DiscordAvatar /> }
+                { localStorage.getItem('discord-token') === null ? <OAuthButton /> : <DiscordAvatar /> }
             </div>
         </nav>
     );

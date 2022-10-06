@@ -1,13 +1,13 @@
 
 function IsAuth() {
     return (
-        sessionStorage.getItem('discord-token') !== null
+        localStorage.getItem('discord-token') !== null
     );
 };
 
 function GetUser(callback: any) {
-    if (sessionStorage.getItem('discord-token') !== null && sessionStorage.getItem('discord-user') === null) {
-        let token = JSON.parse(sessionStorage.getItem('discord-token')!);
+    if (localStorage.getItem('discord-token') !== null && localStorage.getItem('discord-user') === null) {
+        let token = JSON.parse(localStorage.getItem('discord-token')!);
         let head = new Headers();
         head.append('Authorization', 'Bearer ' + token.access_token);
 
@@ -20,7 +20,7 @@ function GetUser(callback: any) {
             .then(res => res.json())
             .then(
                 (result) => {
-                    sessionStorage.setItem('discord-user', JSON.stringify(result))
+                    localStorage.setItem('discord-user', JSON.stringify(result))
                     callback(result);
                 },
                 (error) => {
@@ -28,9 +28,9 @@ function GetUser(callback: any) {
                 }
             );
     }
-    else if (sessionStorage.getItem('discord-user') !== null)
+    else if (localStorage.getItem('discord-user') !== null)
     {
-        callback(JSON.parse(sessionStorage.getItem('discord-user')!));
+        callback(JSON.parse(localStorage.getItem('discord-user')!));
     }
     else
     {
@@ -39,8 +39,8 @@ function GetUser(callback: any) {
 }
 
 function Signout(callback: VoidFunction) {
-    sessionStorage.removeItem('discord-user');
-    sessionStorage.removeItem('discord-token');
+    localStorage.removeItem('discord-user');
+    localStorage.removeItem('discord-token');
     callback();
 }
 
