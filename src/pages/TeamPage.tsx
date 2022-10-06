@@ -25,6 +25,7 @@ function TeamPage() {
     const [isLocked, setIsLocked] = useState(true);
 
     const name = JSON.parse(localStorage.getItem('discord-user')!).id;
+    //console.log(name);
 
     const Role = (roleId: number) => {
         switch (roleId) {
@@ -137,10 +138,13 @@ function TeamPage() {
             .then(
                 (result) => {
                     setIsLoaded(true);
-                    setItems(result);
-                    result.sort((a: RosterListing, b: RosterListing) => { return a.FantasyRole - b.FantasyRole; })
                     if (result.length > 0) {
+                        setItems(result);
+                        result.sort((a: RosterListing, b: RosterListing) => { return a.FantasyRole - b.FantasyRole; });
                         setTeamName(result[0].TeamName);
+                    }
+                    else{
+                        setTeamName("N/A - Empty Team");
                     }
                 },
                 (error) => {
@@ -183,6 +187,12 @@ function TeamPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {
+                                    (items.length === 0) &&
+                                        <tr><td></td><td></td><td></td><td></td></tr>
+                                    }
+                                    
+                                    
                                     {items.map((item: RosterListing, index: number) =>
                                         <tr key={"row" + item.PlayerID}>
                                             <td key={"name" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal">{item.PlayerName}</td>
