@@ -24,7 +24,7 @@ function TeamPage() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isLocked, setIsLocked] = useState(true);
 
-    const name = JSON.parse(sessionStorage.getItem('discord-user')!).id;
+    const name = JSON.parse(localStorage.getItem('discord-user')!).id;
 
     const Role = (roleId: number) => {
         switch (roleId) {
@@ -63,7 +63,7 @@ function TeamPage() {
 
     const SetPlayStatus = (playerId: number, playStatus: number, revertCallback: any) => {
 
-        let token = JSON.parse(sessionStorage.getItem('discord-token')!);
+        let token = JSON.parse(localStorage.getItem('discord-token')!);
         let head = new Headers();
         head.append('Authorization', 'Bearer ' + token.access_token);
         head.append('id', name);

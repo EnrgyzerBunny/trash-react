@@ -4,10 +4,10 @@ import { IsAuth, GetUser, Signout } from "../auth";
 function DiscordAvatar() {
   //const [error, setError]: any = useState(null);
   const [isLoaded, setIsLoaded]: any = useState(
-    sessionStorage.getItem("discord-user") !== null
+    localStorage.getItem("discord-user") !== null
   );
   const [user, setUser]: any = useState(
-    JSON.parse(sessionStorage.getItem("discord-user")!)
+    JSON.parse(localStorage.getItem("discord-user")!)
   );
   //console.log(isLoaded);
 
