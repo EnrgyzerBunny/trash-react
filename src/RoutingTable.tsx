@@ -13,6 +13,7 @@ import PlayerPage from "./pages/PlayerPage";
 import TeamsPage from "./pages/TeamsPage";
 import TeamPage from "./pages/TeamPage";
 import { usePageTracking } from "./reportWebVitals";
+import AdminDirect from "./pages/AdminDirect";
 
 export default function RoutingTable() {
 
@@ -26,6 +27,14 @@ export default function RoutingTable() {
             element={
               <RequireAuth>
                 <TeamPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admindirect"
+            element={
+              <RequireAuth>
+                <AdminDirect />
               </RequireAuth>
             }
           />
