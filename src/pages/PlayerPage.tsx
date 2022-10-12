@@ -50,7 +50,7 @@ function PlayerDetails() {
             case 2:
                 return "Support";
             case 4:
-                return "Offlane";
+                return "Mid";
             default:
                 return "Unknown";
         }
