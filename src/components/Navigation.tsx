@@ -2,11 +2,11 @@ import React from "react";
 import OAuthButton from "./OAuthButton";
 import DiscordAvatar from "./DiscordAvatar";
 import { Link } from 'react-router-dom';
-import { IsAuth } from '../auth';
+import { GetUser, IsAuth } from '../auth';
 
 function Navigation() {
 
-    const navItems = IsAuth()? 
+    var navItems = IsAuth()? 
     [ //if auth
         ['Home', '/'],
         ['Team', '/team'],
@@ -19,6 +19,16 @@ function Navigation() {
         ['Players', '/players'],
         //['Schedule', '/schedule'],
     ];
+
+    var id = JSON.parse(localStorage.getItem('discord-user')!).id;
+    if (id !== null && (
+        id === "109498432921546752" ||
+        id === "93387395000446976" ||
+        id === "148123232254296065"
+    ))
+    {
+        navItems.push(['Admin','/admindirect']);
+    }
 
     return (
         <nav className="flex shadow-lg bg-stone-100 dark:bg-stone-500 min-w-fit ">
