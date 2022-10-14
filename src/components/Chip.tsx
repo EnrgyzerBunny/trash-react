@@ -6,7 +6,7 @@ function Chip(props: any) {
         return (
             <div className="flex flex-wrap justify-center space-x-2">
                 <span
-                    className="px-4 py-2 rounded-full text-gray-500 border border-gray-300 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-gray-300 transition duration-300 ease">
+                    className="px-4 py-2 rounded-full dark:text-gray-500 border border-gray-300 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-gray-300 transition duration-300 ease">
                     {props.children}
                     <button onClick={props.onRemove} className="bg-transparent hover focus:outline-none">
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times"
@@ -24,7 +24,7 @@ function Chip(props: any) {
         return (
             <div className="flex flex-wrap space-x-2">
                 <span
-                    className="hover px-4 py-2 rounded-full border border-gray-300 text-stone-50 font-semibold text-base flex align-center w-max cursor-pointer active:bg-gray-300 hover:bg-stone-400 transition duration-300 ease">
+                    className="hover px-4 py-2 rounded-full border border-stone-500 dark:border-stone-300 dark:text-stone-50 text-stone-500 font-semibold text-base flex align-center w-max cursor-pointer active:bg-gray-300 hover:bg-stone-400 transition duration-300 ease">
                     {props.children}
                 </span>
             </div>
