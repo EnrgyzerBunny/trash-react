@@ -34,10 +34,9 @@ function FeaturedPlayer(props: any) {
             .then(
                 (result) => {
                     setIsLoaded(true);
-
                     if (result.length > 0) {
                         var ran = new seedrandom(new Date().toISOString().slice(0, 10));
-                        var index = Math.round(ran.quick() * result.length);
+                        var index = Math.round(ran.quick() * (result.length - 1));
                         setPlayer(result[index]);
                         setPlayerImg("https://cdn.cloudflare.steamstatic.com/apps/dota2/players/" + result[index].AccountID + ".png");
                     }

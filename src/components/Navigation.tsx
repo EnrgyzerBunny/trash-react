@@ -20,7 +20,11 @@ function Navigation() {
         //['Schedule', '/schedule'],
     ];
 
-    var id = JSON.parse(localStorage.getItem('discord-user')!).id;
+    var id = JSON.parse(localStorage.getItem('discord-user')!);
+    if (id !== null)
+    {
+        id = id.id;
+    }
     if (id !== null && (
         id === "109498432921546752" ||
         id === "93387395000446976" ||
