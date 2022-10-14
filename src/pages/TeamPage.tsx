@@ -22,7 +22,7 @@ function TeamPage() {
     const [items, setItems]: any = useState([]);
     const [teamName, setTeamName]: any = useState(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [isLocked, setIsLocked] = useState(true);
+    const [lockInfo, setLockInfo]: any = useState({});
 
     const name = JSON.parse(localStorage.getItem('discord-user')!).id;
     //console.log(name);
@@ -50,7 +50,7 @@ function TeamPage() {
     };
 
     const IsAtLimit = (role: number) => {
-        switch(role) {
+        switch (role) {
             case 1:
                 return GetRolePlayCount(role) >= 2;
             case 2:
@@ -64,44 +64,67 @@ function TeamPage() {
 
     const SetPlayStatus = (playerId: number, playStatus: number, revertCallback: any) => {
 
-        let token = JSON.parse(localStorage.getItem('discord-token')!);
-        let head = new Headers();
-        head.append('Authorization', 'Bearer ' + token.access_token);
-        head.append('id', name);
-
-        const init = {
-            method: 'POST',
-            headers: head,
-        };
-
-        fetch("https://sea.ddns.net/api/playstatus?player=" + playerId + "&playstatus=" + playStatus, init)
-            .then(res => {
-                if (!res.ok) {
-                    console.log(res);
-                    if (res.status === 401) {
-                        setError(res.status + "-" + res.statusText + ": Token may have expired, please refresh login.");
+        //reverify lock
+        fetch("https://sea.ddns.net/api/rosterstatus?season=4")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    if (result && result.Value !== "OPEN") {
+                        setIsLoaded(true);
+                        setError("ROSTER IS LOCKED");
+                        setModalIsOpen(true);
+                        revertCallback();
+                        return;
                     }
-                    else
-                        setError(res.statusText);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error.message);
                     setModalIsOpen(true);
                     revertCallback();
                     return;
                 }
-                return res.json();
-            })
-            .then(
-                (result) => {
-                    if (result.changedRows != null && result.changedRows === 1) {
-                        console.log(playerId + " set to " + playStatus);
-                    }
-                },
-                (error) => {
-                    console.log(error);
-                    setError(error);
-                    setModalIsOpen(true);
-                    revertCallback();
-                }
-            );
+            ).then(() => {
+
+                let token = JSON.parse(localStorage.getItem('discord-token')!);
+                let head = new Headers();
+                head.append('Authorization', 'Bearer ' + token.access_token);
+                head.append('id', name);
+
+                const init = {
+                    method: 'POST',
+                    headers: head,
+                };
+
+                fetch("https://sea.ddns.net/api/playstatus?player=" + playerId + "&playstatus=" + playStatus, init)
+                    .then(res => {
+                        if (!res.ok) {
+                            console.log(res);
+                            if (res.status === 401) {
+                                setError(res.status + "-" + res.statusText + ": Token may have expired, please refresh login.");
+                            }
+                            else
+                                setError(res.statusText);
+                            setModalIsOpen(true);
+                            revertCallback();
+                            return;
+                        }
+                        return res.json();
+                    })
+                    .then(
+                        (result) => {
+                            if (result.changedRows != null && result.changedRows === 1) {
+                                console.log(playerId + " set to " + playStatus);
+                            }
+                        },
+                        (error) => {
+                            console.log(error);
+                            setError(error);
+                            setModalIsOpen(true);
+                            revertCallback();
+                        }
+                    );
+            });
     };
 
 
@@ -111,17 +134,17 @@ function TeamPage() {
         return (
             <div className="flex">
                 <div className="flex-auto"></div>
-                <Switch disabled={IsAtLimit(items[index].FantasyRole) && items[index].PlayStatus === 0}
+                <Switch disabled={(lockInfo.Value !== "OPEN") || (IsAtLimit(items[index].FantasyRole) && items[index].PlayStatus === 0)}
                     checked={items[index].PlayStatus === 1}
                     onChange={() => { let newStatus = (items[index].PlayStatus === 0) ? 1 : 0; let currentStatus = items[index].PlayStatus; UpdateInline(index, newStatus); SetPlayStatus(items[index].PlayerID, newStatus, () => { UpdateInline(index, currentStatus); }); }}
                     className={`${items[index].PlayStatus === 1 ? 'bg-lime-700 opacity-100 shadow-lg' : 'bg-stone-700 opacity-40'
                         } relative inline-flex items-center h-6 rounded-full w-11 transition ease-in-out duration-500 my-1 ${IsAtLimit(items[index].FantasyRole) && items[index].PlayStatus === 0 ? 'invisible' : 'visible'
-                    }`}
+                        }`}
                 >
                     <span className="sr-only">Activate Player</span>
                     <span
                         className={`${items[index].PlayStatus === 1 ? 'translate-x-6' : 'translate-x-1'
-                            } inline-block w-4 h-4 transform bg-stone-100 rounded-full transition ease-in-out duration-500`}
+                            } inline-block w-4 h-4 transform bg-stone-100 rounded-full transition ease-in-out duration-500 ${(lockInfo.Value !== "OPEN") || (IsAtLimit(items[index].FantasyRole) && items[index].PlayStatus === 0) ? 'invisible' : 'visible'}`}
                     />
                 </Switch>
                 <div className="flex-auto"></div>
@@ -132,6 +155,23 @@ function TeamPage() {
     let closeModal = () => { setModalIsOpen(false); };
 
     useEffect(() => {
+        fetch("https://sea.ddns.net/api/rosterstatus?season=4")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    if (result) {
+                        setLockInfo(result);
+                    }
+                    else {
+                        setLockInfo({ "Value": "ERROR LOCK", "Start": "FORCED", "End": "FORCED" });
+                    }
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error.message);
+                    setModalIsOpen(true);
+                }
+            );
 
         fetch("https://sea.ddns.net/api/roster?name=" + name)
             .then(res => res.json())
@@ -143,7 +183,7 @@ function TeamPage() {
                         result.sort((a: RosterListing, b: RosterListing) => { return a.FantasyRole - b.FantasyRole; });
                         setTeamName(result[0].TeamName);
                     }
-                    else{
+                    else {
                         setTeamName("N/A - Empty Team");
                     }
                 },
@@ -152,7 +192,7 @@ function TeamPage() {
                     setError(error.message);
                     setModalIsOpen(true);
                 }
-            )
+            );
     }, [name]);
 
     if (!isLoaded) {
@@ -166,7 +206,7 @@ function TeamPage() {
                     </div>
                 </PageWrapper>
             </>
-            );
+        );
     } else {
         return (
             <>
@@ -174,6 +214,7 @@ function TeamPage() {
                     <div className="col-start-3 col-end-7 flex flex-col">
                         <ContentPanel>
                             <div className="">Manage Team - {teamName}</div>
+                            <div className="py-4">Roster is: {lockInfo.Value} - Roster will {(lockInfo.Value !== "OPEN")? "unlock" : "lock"} at {(lockInfo.Value !== "OPEN")? lockInfo.End : lockInfo.Start} PT</div>
                             <div className="flex-auto py-4">
                                 Players:
                             </div>
@@ -188,11 +229,11 @@ function TeamPage() {
                                 </thead>
                                 <tbody>
                                     {
-                                    (items.length === 0) &&
+                                        (items.length === 0) &&
                                         <tr><td></td><td></td><td></td><td></td></tr>
                                     }
-                                    
-                                    
+
+
                                     {items.map((item: RosterListing, index: number) =>
                                         <tr key={"row" + item.PlayerID}>
                                             <td key={"name" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal">{item.PlayerName}</td>
