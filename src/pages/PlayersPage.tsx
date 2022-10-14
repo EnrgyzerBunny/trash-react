@@ -1,6 +1,7 @@
 import { Combobox, Switch, Transition } from "@headlessui/react";
 import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Chip from "../components/Chip";
 import ContentPanel from "../components/ContentPanel";
 import PageWrapper from "../components/PageWrapper";
 
@@ -20,7 +21,6 @@ function PlayersPage() {
     const [error, setError]: any = useState(null);
     const [isLoaded, setIsLoaded]: any = useState(false);
     const [items, setItems]: any = useState([]);
-    const [people, setPeople]: any = useState([]);
 
     const Role = (roleId: number) => {
         switch (roleId) {
@@ -70,7 +70,6 @@ function PlayersPage() {
                     });
 
                     setItems(result);
-                    setPeople(result);
 
                 },
                 (error) => {
@@ -102,7 +101,7 @@ function PlayersPage() {
                         {items.map((item: RosterListing) => (
                             (!freeAgents || item.FantasyTeamID === 0) ?
                                 <tr key={"row" + item.PlayerID}>
-                                    <td key={"name" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal"><Link to={"/player/" + item.PlayerID}>{item.PlayerName}</Link></td>
+                                    <td key={"name" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal"><Link to={"/player/" + item.PlayerID}><Chip>{item.PlayerName}</Chip></Link></td>
                                     <td key={"team" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal">{item.ProTeamName}</td>
                                     <td key={"role" + item.PlayerID} className="border px-4 py-2 border-stone-600 font-normal">{Role(item.FantasyRole)}</td>
                                 </tr>

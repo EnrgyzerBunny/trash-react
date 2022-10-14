@@ -24,7 +24,7 @@ function Chip(props: any) {
         return (
             <div className="flex flex-wrap space-x-2">
                 <span
-                    className="hover px-4 py-2 rounded-full border border-gray-300 text-stone-50 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-gray-300 hover:bg-stone-400 transition duration-300 ease">
+                    className="hover px-4 py-2 rounded-full border border-gray-300 text-stone-50 font-semibold text-base flex align-center w-max cursor-pointer active:bg-gray-300 hover:bg-stone-400 transition duration-300 ease">
                     {props.children}
                 </span>
             </div>
