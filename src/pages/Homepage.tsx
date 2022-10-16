@@ -5,7 +5,7 @@ import ContentPanel from '../components/ContentPanel';
 import TeamsTable from '../components/TeamsTable';
 import FeaturedPlayer from '../components/FeaturedPlayer';
 
-import GroupStageBracket from '../assets/Brackets/DotaTrash-22 - Group Stage-10-15.jpg'
+import GroupStageBracket from '../assets/Brackets/DotaTrash-22 - Group Stage-10-16.jpg'
 //import MainEventBracket from '../assets/Brackets/DotaTrash-22 - Main Event.jpg'
 
 function Homepage() {

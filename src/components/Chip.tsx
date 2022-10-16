@@ -22,7 +22,7 @@ function Chip(props: any) {
     }
     else {
         return (
-            <div className={`flex flex-wrap space-x-2 ${(props.align != null)? 'justify-' + props.align : ''}`}>
+            <div className={`flex flex-wrap space-x-2 ${(props.align === "end")? ('justify-end') : ''}`}>
                 <span
                     className={`hover px-4 py-2 rounded-full border border-stone-500 dark:border-stone-300 dark:text-stone-50 text-stone-500 font-semibold ${'text-' + ((props.textSize != null)? 'props.textSize' : 'base')} flex align-center w-max cursor-pointer active:bg-gray-300 hover:bg-stone-400 transition duration-300 ease`}>
                     {props.children}
