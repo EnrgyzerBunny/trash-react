@@ -164,9 +164,9 @@ function MatchupPage() {
     }, []);
 
     if (error) {
-        return <ContentPanel><div>Error: {error.message}</div></ContentPanel>;
+        return <PageWrapper><div className="col-start-3 col-end-7 flex flex-col"><ContentPanel><div>Error: {error.message}</div></ContentPanel></div></PageWrapper>;
     } else if (!isLoaded) {
-        return <ContentPanel><div>Loading...</div></ContentPanel>;
+        return <PageWrapper><div className="col-start-3 col-end-7 flex flex-col animate-pulse"><ContentPanel><div>Loading...</div></ContentPanel></div></PageWrapper>;
     } else {
         return (
             <PageWrapper>
