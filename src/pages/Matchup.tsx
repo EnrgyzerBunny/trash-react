@@ -4,6 +4,7 @@ import ContentPanel from '../components/ContentPanel';
 import { Link } from 'react-router-dom';
 import Chip from '../components/Chip';
 import { IsAuth } from '../auth';
+import RecentConsumedMatches from '../components/RecentConsumedMatches';
 
 function MatchupPage() {
     const [matchups, setMatchups]: any = useState([]);
@@ -174,8 +175,9 @@ function MatchupPage() {
                     <ContentPanel>
 
                         <div className="pt-6">Current Matchups - Starting {new Date(matchups[0].Date).toDateString()}</div>
+                        <RecentConsumedMatches date={matchups[0].Date} />
                         {matchups.map((item: any, i: any) => (
-                            <div className='py-6'>
+                            <div className='pb-6'>
                                 {UserMatchup(i)}
                             </div>
                         ))}
