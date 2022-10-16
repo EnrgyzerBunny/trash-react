@@ -10,12 +10,14 @@ function Navigation() {
     [ //if auth
         ['Home', '/'],
         ['Team', '/team'],
+        ['Matchup', '/matchup'],
         ['Players', '/players'],
         //['Schedule', '/schedule'],
     ]
     :
     [ //if unauth
         ['Home', '/'],
+        ['Matchup', '/matchup'],
         ['Players', '/players'],
         //['Schedule', '/schedule'],
     ];
