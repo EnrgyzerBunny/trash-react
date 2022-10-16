@@ -6,6 +6,7 @@ import TeamsTable from '../components/TeamsTable';
 import FeaturedPlayer from '../components/FeaturedPlayer';
 
 import GroupStageBracket from '../assets/Brackets/DotaTrash-22 - Group Stage-10-16.jpg'
+import WaiverPriority from '../components/WaiverPriority';
 //import MainEventBracket from '../assets/Brackets/DotaTrash-22 - Main Event.jpg'
 
 function Homepage() {
@@ -36,6 +37,7 @@ function Homepage() {
                 {/* <ContentPanel>
                     <img className='bg-stone-600 shadow-lg' alt="Group Stage Bracket" src={MainEventBracket}></img>
                 </ContentPanel> */}
+                <WaiverPriority />
                 <FeaturedPlayer />
                 <ContentPanel>
                     <TeamsTable />
