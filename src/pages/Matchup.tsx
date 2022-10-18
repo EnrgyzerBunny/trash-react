@@ -21,6 +21,8 @@ function MatchupPage() {
                 return "Support";
             case 4:
                 return "Mid";
+            case -1:
+                return "None";
             default:
                 return "Unknown";
         }
@@ -35,6 +37,30 @@ function MatchupPage() {
         }
 
         return null;
+    }
+
+    function ArrowLeftGlyph() {
+        return (
+            <div className='w-1/5 pt-0.5'>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
+                    <path fillRule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clipRule="evenodd" />
+                </svg>
+
+            </div>
+        );
+    }
+
+    function ArrowRightGlyph() {
+        return (
+            <div className='flex flex-col w-1/5'>
+                <div className='flex-auto'></div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 flex-none">
+                    <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+                </svg>
+
+            </div>
+
+        );
     }
 
     function UserMatchup(index: any) {
@@ -81,15 +107,35 @@ function MatchupPage() {
                     <tbody>
                         {teamA.Players.map((item: any, i: any) => (
                             <tr key={"row" + item.PlayerID + "-" + teamB.Players[i].PlayerID}>
-                                <td key={"name-a" + item.PlayerID} className={`border w-2/12 px-2 py-2 border-stone-600 font-normal text-sm ${(item.PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}><Link to={"/player/" + item.PlayerID}><Chip textSize="sm">{item.PlayerName}</Chip></Link></td>
+                                <td key={"name-a" + item.PlayerID} className={`border w-2/12 px-2 py-2 border-stone-600 font-normal text-sm ${(item.PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>
+                                    {item.FantasyRole !== -1 && <Link to={"/player/" + item.PlayerID}><Chip textSize="xs">{item.PlayerName}</Chip></Link>}
+                                </td>
                                 <td key={"team-a" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(item.PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{item.ProTeamTag}</td>
                                 <td key={"points-a" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(item.PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{item["Result Rows"]}</td>
                                 <td key={"rows-a" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(item.PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{item.Points}</td>
-                                <td key={"vs" + item.PlayerID} className="border w-1/12 text-center px-2 py-2 border-stone-600 bg-stone-600 font-normal text-sm">{(item.FantasyRole === teamB.Players[i].FantasyRole) ? (Role(item.FantasyRole)) : ('<' + Role(item.FantasyRole) + "\n" + Role(teamB.Players[i].FantasyRole) + ">")}</td>
+                                <td key={"vs" + item.PlayerID} className="border w-1/12 text-center px-2 py-2 border-stone-600 bg-stone-600 font-normal text-sm">
+                                    {(item.FantasyRole !== -1) ?
+                                        <div className='flex'>
+                                            {(item.FantasyRole === teamB.Players[i].FantasyRole || teamB.Players[i].FantasyRole === -1) ? null : ArrowLeftGlyph()}
+                                            <div className='flex-auto'>
+                                                {(item.FantasyRole === teamB.Players[i].FantasyRole || teamB.Players[i].FantasyRole === -1) ? (Role(item.FantasyRole)) : (Role(item.FantasyRole) + "\n" + (Role(teamB.Players[i].FantasyRole)))}
+                                            </div>
+                                            {(item.FantasyRole === teamB.Players[i].FantasyRole || teamB.Players[i].FantasyRole === -1) ? null : ArrowRightGlyph()}
+                                        </div>
+                                        :
+                                        <div className='flex'>
+                                            <div className='flex-auto'>
+                                                {Role(teamB.Players[i].FantasyRole)}
+                                            </div>
+                                        </div>
+                                    }
+                                </td>
                                 <td key={"rows-b" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(teamB.Players[i].PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{teamB.Players[i].Points}</td>
                                 <td key={"points-b" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(teamB.Players[i].PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{teamB.Players[i]["Result Rows"]}</td>
                                 <td key={"team-b" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(teamB.Players[i].PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{teamB.Players[i].ProTeamTag}</td>
-                                <td key={"name-b" + item.PlayerID} className={`border w-2/12 px-2 py-2 border-stone-600 font-normal text-sm ${(teamB.Players[i].PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}><Link to={"/player/" + teamB.Players[i].PlayerID}><Chip align="end" textSize="sm">{teamB.Players[i].PlayerName}</Chip></Link></td>
+                                <td key={"name-b" + item.PlayerID} className={`border w-2/12 px-2 py-2 border-stone-600 font-normal text-sm ${(teamB.Players[i].PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>
+                                    {teamB.Players[i].FantasyRole !== -1 && <Link to={"/player/" + teamB.Players[i].PlayerID}><Chip align="end" textSize="xs">{teamB.Players[i].PlayerName}</Chip></Link>}
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -132,11 +178,31 @@ function MatchupPage() {
                             }
 
                         }
+                        compiled.forEach((element: any) => {
+                            if (element.Players.length < 8) {
+                                for (var y = element.Players.length; y < 8; y++) {
+                                    element.Players.push(
+                                        {
+                                            "TeamName": element.TeamName,
+                                            "OwnerID": element.OwnerID,
+                                            "OwnerName": element.OwnerName,
+                                            "TeamID": null,
+                                            "PlayerName": null,
+                                            "PlayStatus": 0,
+                                            "PlayerID": null,
+                                            "FantasyRole": -1,
+                                            "ProTeamTag": null,
+                                            "Points": null,
+                                            "Result Rows": null
+                                        }
+                                    );
+                                }
+                                console.log(element.TeamName + ": " + element.Players.length);
+                            }
+                        });
+
+
                         setPlayerRows(compiled);
-
-
-
-
                     }
                     var matchupList = result.Matchups.Matchups;
                     if (IsAuth()) {
@@ -174,8 +240,8 @@ function MatchupPage() {
                 <div className="col-start-3 col-end-7 flex flex-col">
                     <ContentPanel>
 
-                        <div className="pt-6">Current Matchups - Starting {new Date(matchups[0].Date).toDateString()}</div>
-                        <RecentConsumedMatches date={matchups[0].Date} />
+                        <div className="pt-6">Current Matchups - Starting {new Date(Date.parse(matchups[0].Date)).toDateString()} {new Date(Date.parse(matchups[0].Date)).toLocaleTimeString()}</div>
+                        <RecentConsumedMatches date={new Date(Date.parse(matchups[0].Date) - 25200000).toISOString()} />
                         {matchups.map((item: any, i: any) => (
                             <div className='pb-6'>
                                 {UserMatchup(i)}

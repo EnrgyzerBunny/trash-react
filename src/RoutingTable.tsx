@@ -15,6 +15,7 @@ import TeamPage from "./pages/TeamPage";
 import { usePageTracking } from "./reportWebVitals";
 import AdminDirect from "./pages/AdminDirect";
 import MatchupPage from "./pages/Matchup";
+import GroupsPage from "./pages/GroupsPage";
 
 export default function RoutingTable() {
 
@@ -44,6 +45,7 @@ export default function RoutingTable() {
           <Route path="/player/*" element={<PlayerPage />} />
           <Route path="/oauth-callback" element={<AuthCallback />} />
           <Route path="/matchup" element={<MatchupPage />} />
+          <Route path="/groups" element={<GroupsPage />} />
           <Route path="/*" element={<NotFound />} />
       </Routes>
     </AuthProvider>
