@@ -197,7 +197,7 @@ function MatchupPage() {
                                         }
                                     );
                                 }
-                                console.log(element.TeamName + ": " + element.Players.length);
+                                //console.log(element.TeamName + ": " + element.Players.length);
                             }
                         });
 
