@@ -74,9 +74,125 @@ function MatchupPage() {
         var teamA = GetTeamRows(matchups[index].TeamA_ID);
         var teamB = GetTeamRows(matchups[index].TeamB_ID);
 
+        var blankTeam = {
+            "TeamName": "ELIMINATED",
+            "OwnerID": "",
+            "OwnerName": "",
+            "TeamID": null,
+            "Points": 0,
+            "Players": [
+                {
+                    "TeamName": "",
+                    "OwnerID": "",
+                    "OwnerName": "",
+                    "TeamID": null,
+                    "PlayerName": null,
+                    "PlayStatus": 0,
+                    "PlayerID": null,
+                    "FantasyRole": -1,
+                    "ProTeamTag": null,
+                    "Points": null,
+                    "Result Rows": null
+                },
+                {
+                    "TeamName": "",
+                    "OwnerID": "",
+                    "OwnerName": "",
+                    "TeamID": null,
+                    "PlayerName": null,
+                    "PlayStatus": 0,
+                    "PlayerID": null,
+                    "FantasyRole": -1,
+                    "ProTeamTag": null,
+                    "Points": null,
+                    "Result Rows": null
+                },
+                {
+                    "TeamName": "",
+                    "OwnerID": "",
+                    "OwnerName": "",
+                    "TeamID": null,
+                    "PlayerName": null,
+                    "PlayStatus": 0,
+                    "PlayerID": null,
+                    "FantasyRole": -1,
+                    "ProTeamTag": null,
+                    "Points": null,
+                    "Result Rows": null
+                },
+                {
+                    "TeamName": "",
+                    "OwnerID": "",
+                    "OwnerName": "",
+                    "TeamID": null,
+                    "PlayerName": null,
+                    "PlayStatus": 0,
+                    "PlayerID": null,
+                    "FantasyRole": -1,
+                    "ProTeamTag": null,
+                    "Points": null,
+                    "Result Rows": null
+                },
+                {
+                    "TeamName": "",
+                    "OwnerID": "",
+                    "OwnerName": "",
+                    "TeamID": null,
+                    "PlayerName": null,
+                    "PlayStatus": 0,
+                    "PlayerID": null,
+                    "FantasyRole": -1,
+                    "ProTeamTag": null,
+                    "Points": null,
+                    "Result Rows": null
+                },
+                {
+                    "TeamName": "",
+                    "OwnerID": "",
+                    "OwnerName": "",
+                    "TeamID": null,
+                    "PlayerName": null,
+                    "PlayStatus": 0,
+                    "PlayerID": null,
+                    "FantasyRole": -1,
+                    "ProTeamTag": null,
+                    "Points": null,
+                    "Result Rows": null
+                },
+                {
+                    "TeamName": "",
+                    "OwnerID": "",
+                    "OwnerName": "",
+                    "TeamID": null,
+                    "PlayerName": null,
+                    "PlayStatus": 0,
+                    "PlayerID": null,
+                    "FantasyRole": -1,
+                    "ProTeamTag": null,
+                    "Points": null,
+                    "Result Rows": null
+                },
+                {
+                    "TeamName": "",
+                    "OwnerID": "",
+                    "OwnerName": "",
+                    "TeamID": null,
+                    "PlayerName": null,
+                    "PlayStatus": 0,
+                    "PlayerID": null,
+                    "FantasyRole": -1,
+                    "ProTeamTag": null,
+                    "Points": null,
+                    "Result Rows": null
+                }
+            ]
+        };
+
         if (teamA === null) {
-            //console.log("Team A Null");
-            return (<></>);
+            teamA = blankTeam;
+        }
+        if (teamB === null) {
+            teamB = blankTeam;
         }
 
         return (
