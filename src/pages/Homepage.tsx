@@ -7,7 +7,7 @@ import FeaturedPlayer from '../components/FeaturedPlayer';
 
 //import GroupStageBracket from '../assets/Brackets/DotaTrash-22 - Group Stage-10-16.jpg'
 import WaiverPriority from '../components/WaiverPriority';
-import MainEventBracket from '../assets/Brackets/DotaTrash-22 - Main Event-seeded.jpg'
+import MainEventBracket from '../assets/Brackets/DotaTrash-22 - Main Event-10-20.jpg'
 import { Dialog } from '@headlessui/react';
 
 function Homepage() {
