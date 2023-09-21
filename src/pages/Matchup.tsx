@@ -263,7 +263,7 @@ function MatchupPage() {
 
     useEffect(() => {
         //console.log("called");
-        fetch("https://sea.ddns.net/api/matchup?season=4")
+        fetch("https://sea.ddns.net/api/matchup?season=5")
             .then(res => res.json())
             .then(
                 (result) => {

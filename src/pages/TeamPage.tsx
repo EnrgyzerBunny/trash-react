@@ -65,7 +65,7 @@ function TeamPage() {
     const SetPlayStatus = (playerId: number, playStatus: number, revertCallback: any) => {
 
         //reverify lock
-        fetch("https://sea.ddns.net/api/rosterstatus?season=4")
+        fetch("https://sea.ddns.net/api/rosterstatus?season=5")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -155,7 +155,7 @@ function TeamPage() {
     let closeModal = () => { setModalIsOpen(false); };
 
     useEffect(() => {
-        fetch("https://sea.ddns.net/api/rosterstatus?season=4")
+        fetch("https://sea.ddns.net/api/rosterstatus?season=5")
             .then(res => res.json())
             .then(
                 (result) => {
