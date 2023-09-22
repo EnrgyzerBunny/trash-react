@@ -33,18 +33,21 @@ function Homepage() {
     return (
         <>
         <PageWrapper>
-            {//<WinnerBanner season="4" team="Bennie and the Slants" onDismiss={dismissCallback} onFinish={reset} />
-            }
+            <WinnerBanner season="5" team="2018 Fantasy Baseball Champion" onDismiss={dismissCallback} onFinish={reset} />
+            
             <div style={styleTrans} className={classTrans}>
                 {/*<ContentPanel>
                     <img className='bg-stone-600 shadow-lg' alt="Group Stage Bracket" src={GroupStageBracket}></img>
                 </ContentPanel>*/}
-                 <ContentPanel>
-                    Main Event
-                 <button onClick={() => setIsLightboxOpen(true)}><img className='bg-stone-600 shadow-lg' alt="Group Stage Bracket" src={MainEventBracket}></img></button>
-                    <div className='font-thin text-xs'>Click to enlarge</div>
-                </ContentPanel>
-                <WaiverPriority />
+                {/* <ContentPanel>*/}
+                {/*    Main Event*/}
+                {/* <button onClick={() => setIsLightboxOpen(true)}><img className='bg-stone-600 shadow-lg' alt="Group Stage Bracket" src={MainEventBracket}></img></button>*/}
+                {/*    <div className='font-thin text-xs'>Click to enlarge</div>*/}
+                {/*</ContentPanel>*/}
+                    {/*<WaiverPriority />*/}
+                    <ContentPanel>
+                        <div>Draft Scheduled for October 3rd 6:30PM ET</div>
+                    </ContentPanel>
                 <FeaturedPlayer />
                 {/* <ContentPanel>
                     <TeamsTable />

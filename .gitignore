@@ -25,3 +25,4 @@ yarn-error.log*
 .vs/ProjectSettings.json
 .vs/trash-react/v17/.suo
 .vs/VSWorkspaceState.json
+*.vsidx
