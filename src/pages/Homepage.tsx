@@ -14,7 +14,7 @@ function Homepage() {
     const [classTrans, setClassTrans] = useState("col-start-3 col-end-7 flex flex-col");
     const [styleTrans, setStyleTrans]: any = useState({});
     const [isLightboxOpen,setIsLightboxOpen]: any = useState(false);
-/*
+
     const dismissCallback = (height: number) => {
         setClassTrans("col-start-3 col-end-7 flex flex-col transition ease-in-out duration-700");
         const newStyle = {
@@ -28,7 +28,7 @@ function Homepage() {
         setClassTrans("col-start-3 col-end-7 flex flex-col");
         setStyleTrans({});
     };
-    */
+    
 
     return (
         <>
