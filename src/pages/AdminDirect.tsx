@@ -22,7 +22,7 @@ function AdminDirect() {
             headers: head,
         };
 
-        fetch("https://sea.ddns.net/api/admindirect?statement=" + statement, init)
+        fetch("https://dotafantasy.com/api/admindirect?statement=" + statement, init)
             .then(res =>  res.json()).then ( (data) => {
                 setResponse(JSON.stringify(data, null, 2));
                 
