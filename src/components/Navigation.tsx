@@ -9,7 +9,7 @@ function Navigation() {
     var navItems = IsAuth()? 
     [ //if auth
         ['Home', '/'],
-        //['Team', '/team'],
+        ['Team', '/team'],
         //['Matchup', '/matchup'],
         //['Groups', '/groups'],
         ['Players', '/players'],

@@ -49,9 +49,9 @@ function Homepage() {
                         <div>Draft Scheduled for October 3rd 6:30PM ET</div>
                     </ContentPanel>
                 <FeaturedPlayer />
-                {/* <ContentPanel>
+                 <ContentPanel>
                     <TeamsTable />
-                </ContentPanel> */}
+                </ContentPanel> 
 
             </div>
         </PageWrapper>
