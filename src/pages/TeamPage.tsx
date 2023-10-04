@@ -26,6 +26,8 @@ function TeamPage() {
     const [lockInfo, setLockInfo]: any = useState({});
     const [teamImg, setTeamImg]: any = useState("https://dotatrashblob.blob.core.windows.net/avatars/team-null.png");
     const inputFile = useRef<HTMLInputElement | null>(null);
+    const uploadForm: any = useRef<HTMLFormElement>(null);
+    const [file, setFile]: any = useState(null);
 
     const name = JSON.parse(localStorage.getItem('discord-user')!).id;
     //console.log(name);
@@ -143,9 +145,9 @@ function TeamPage() {
         head.append('Authorization', 'Bearer ' + token.access_token);
         head.append('id', name);
 
-        const formData = new FormData();
+        const formData = new FormData(uploadForm.current);
 
-        formData.append('File', file);
+        formData.append('File', file.target.files[0]);
 
         const init = {
             method: 'POST',
@@ -169,7 +171,10 @@ function TeamPage() {
             })
             .then(
                 (result) => {
-                    //refresh somehow
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                    
                 },
                 (error) => {
                     console.log(error);
@@ -279,9 +284,13 @@ function TeamPage() {
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                         </svg>
                                     </div>
+                                    <form ref={uploadForm}
+                                        id='uploadForm'
+                                        method='post'
+                                        encType="multipart/form-data">
                                     <input type='file' id='file' accept="image/png" ref={inputFile} style={{ display: 'none' }} onChange={(event) => {
                                         StartUpload(event)
-                                    }} />
+                                    }} /></form>
                                 </div>
 
                             </div>
