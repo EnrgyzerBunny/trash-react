@@ -1,8 +1,9 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect, useRef } from "react";
 import ContentPanel from "../components/ContentPanel";
 import PageWrapper from "../components/PageWrapper";
 import { Switch } from '@headlessui/react';
 import GlobalModal from "../components/GlobalModal";
+import { Link } from "react-router-dom";
 
 type RosterListing = {
     TeamName: string,
@@ -24,6 +25,7 @@ function TeamPage() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [lockInfo, setLockInfo]: any = useState({});
     const [teamImg, setTeamImg]: any = useState("https://dotatrashblob.blob.core.windows.net/avatars/team-null.png");
+    const inputFile = useRef<HTMLInputElement | null>(null);
 
     const name = JSON.parse(localStorage.getItem('discord-user')!).id;
     //console.log(name);
@@ -128,6 +130,56 @@ function TeamPage() {
             });
     };
 
+    const UploadModal = () => {
+        if (inputFile && inputFile.current) {
+            inputFile.current.click();
+        }
+    };
+
+    const StartUpload = (file: any) => {
+
+        let token = JSON.parse(localStorage.getItem('discord-token')!);
+        let head = new Headers();
+        head.append('Authorization', 'Bearer ' + token.access_token);
+        head.append('id', name);
+
+        const formData = new FormData();
+
+        formData.append('File', file);
+
+        const init = {
+            method: 'POST',
+            headers: head,
+            body: formData,
+        };
+
+        fetch("https://sea.ddns.net/api/upload?type=team&teamname=" + teamName, init)
+            .then(res => {
+                if (!res.ok) {
+                    console.log(res);
+                    if (res.status === 401) {
+                        setError(res.status + "-" + res.statusText + ": Token may have expired, please refresh login.");
+                    }
+                    else
+                        setError(res.statusText);
+                    setModalIsOpen(true);
+                    return;
+                }
+                return res.json();
+            })
+            .then(
+                (result) => {
+                    //refresh somehow
+                },
+                (error) => {
+                    console.log(error);
+                    setError(error);
+                    setModalIsOpen(true);
+                }
+            );
+
+    };
+
 
 
     const ActivateSwitch = (index: number) => {
@@ -194,7 +246,7 @@ function TeamPage() {
                     setError(error.message);
                     setModalIsOpen(true);
                 }
-        );
+            );
 
     }, [name]);
 
@@ -217,13 +269,24 @@ function TeamPage() {
                     <div className="col-start-3 col-end-7 flex flex-col">
                         <ContentPanel>
                             <div className="w-2/5 pb-4">
-                                <img src={teamImg} alt="" onError={({ currentTarget }) => {
-                                    currentTarget.onerror = null; // prevents looping
-                                    currentTarget.src = "https://dotatrashblob.blob.core.windows.net/avatars/team-null.png";
-                                }} className="bg-stone-600 shadow-lg rounded-xl" />
+                                <div className="relative w-[200px]">
+                                    <img src={teamImg} alt="" onError={({ currentTarget }) => {
+                                        currentTarget.onerror = null; // prevents looping
+                                        currentTarget.src = "https://dotatrashblob.blob.core.windows.net/avatars/team-null.png";
+                                    }} className="bg-stone-600 shadow-lg rounded-xl" />
+                                    <div onClick={UploadModal} className="absolute bg-stone-600 bottom-[-10px] right-[-10px] rounded-full p-2 shadow-lg hover hover:bg-stone-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                        </svg>
+                                    </div>
+                                    <input type='file' id='file' accept="image/png" ref={inputFile} style={{ display: 'none' }} onChange={(event) => {
+                                        StartUpload(event)
+                                    }} />
+                                </div>
+
                             </div>
                             <div className="">Manage Team - {teamName}</div>
-                            <div className="py-4">Roster is: {lockInfo.Value} - Roster will {(lockInfo.Value !== "OPEN")? "unlock" : "lock"} at {(lockInfo.Value !== "OPEN")? lockInfo.End : lockInfo.Start} PT</div>
+                            <div className="py-4">Roster is: {lockInfo.Value} - Roster will {(lockInfo.Value !== "OPEN") ? "unlock" : "lock"} at {(lockInfo.Value !== "OPEN") ? lockInfo.End : lockInfo.Start} PT</div>
                             <div className="flex-auto py-4">
                                 Players:
                             </div>
