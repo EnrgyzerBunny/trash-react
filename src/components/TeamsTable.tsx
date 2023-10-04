@@ -52,8 +52,12 @@ function TeamsTable() {
                     <tbody>
                         {items.map((item: Leaderboard) => (
                             <tr key={item.TeamID}>
-                                <td key={"name" + item.TeamID} className="border px-4 py-2 text-stone-500 dark:text-stone-200 border-stone-600 bg-stone-300 dark:bg-stone-500 font-normal">
-                                    <Link to={"/teams/" + item.TeamID}>
+                                <td key={"name" + item.TeamID} className="flex border px-4 py-2 text-stone-500 dark:text-stone-200 border-stone-600 bg-stone-300 dark:bg-stone-500 font-normal">
+                                    <img src={"https://dotatrashblob.blob.core.windows.net/avatars/team-" + item.TeamName + ".png"} alt="" onError={({ currentTarget }) => {
+                                        currentTarget.onerror = null; // prevents looping
+                                        currentTarget.src = "https://dotatrashblob.blob.core.windows.net/avatars/team-null.png";
+                                    }} className="bg-stone-600 shadow-lg rounded w-14 mr-2" />
+                                    <Link className="pt-2" to={"/teams/" + item.TeamID}>
                                         
                                         <Chip>{item.TeamName}</Chip>
                                     </Link>

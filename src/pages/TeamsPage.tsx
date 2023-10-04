@@ -33,6 +33,7 @@ function TeamDetails() {
     const [isLoaded, setIsLoaded]: any = useState(false);
     const [items, setItems]: any = useState([]);
     const [teamName, setTeamName]: any = useState(null);
+    const [teamImg, setTeamImg]: any = useState("https://dotatrashblob.blob.core.windows.net/avatars/team-null.png");
 
     let { id }: any = useParams<"id">();
 
@@ -59,6 +60,7 @@ function TeamDetails() {
                     result.sort((a: RosterListing, b: RosterListing) => { return a.FantasyRole - b.FantasyRole; })
                     if (result.length > 0) {
                         setTeamName(result[0].TeamName);
+                        setTeamImg("https://dotatrashblob.blob.core.windows.net/avatars/team-" + result[0].TeamName + ".png");
                     }
                 },
                 (error) => {
@@ -78,6 +80,12 @@ function TeamDetails() {
                 <div className="col-start-3 col-end-7 flex flex-col">
                     <ContentPanel>
                         <div className="flex flex-col min-w-full">
+                            <div className="w-2/5 pb-4">
+                                <img src={teamImg} alt="" onError={({ currentTarget }) => {
+                                    currentTarget.onerror = null; // prevents looping
+                                    currentTarget.src = "https://dotatrashblob.blob.core.windows.net/avatars/team-null.png";
+                                }} className="bg-stone-600 shadow-lg rounded-xl" />
+                            </div>
                             <div className="font-bold text-xl py-4">
                                 {teamName}
                             </div>

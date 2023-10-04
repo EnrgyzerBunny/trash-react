@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import ContentPanel from "./ContentPanel";
 import ODLogo from '../assets/OD-logo.png';
 import DBLogo from '../assets/DB-logo.png';
+import { Link } from "react-router-dom";
+import Chip from "./Chip";
 const seedrandom = require('seedrandom');
 
 
@@ -69,7 +71,11 @@ function FeaturedPlayer(props: any) {
                                             <tr className="">
                                                 <td className="flex-auto text-left">
                                                     <div className="font-bold text-xl">
-                                                        {player.PlayerName}
+                                                        <Link to={"/player/" + player.PlayerID}>
+
+                                                            <Chip>{player.PlayerName}</Chip>
+                                                        </Link>
+                                                        
                                                     </div>
                                                 </td>
                                                 <td className="flex-none px-2 w-12">
@@ -85,7 +91,7 @@ function FeaturedPlayer(props: any) {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div className="text-l">
+                                                    <div className="text-base px-4">
                                                         {player.ProTeamName}
                                                     </div>
                                                 </td>
@@ -94,7 +100,7 @@ function FeaturedPlayer(props: any) {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div className="text-l">
+                                                    <div className="text-base px-4">
                                                         {Role(player.FantasyRole)}
                                                     </div>
                                                 </td>
@@ -103,8 +109,14 @@ function FeaturedPlayer(props: any) {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div className="text-l">
-                                                        {(player.TeamName != null) ? player.TeamName : "Free Agent"}
+                                                    <div className="text-base">
+                                                        {(player.TeamName != null) ?
+                                                            <Link to={"/teams/" + player.FantasyTeamID}>
+
+                                                                <Chip>{player.TeamName}</Chip>
+                                                            </Link>
+                                                            
+                                                            : "Free Agent"}
                                                     </div>
                                                 </td>
                                                 <td></td>

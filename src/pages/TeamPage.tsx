@@ -23,6 +23,7 @@ function TeamPage() {
     const [teamName, setTeamName]: any = useState(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [lockInfo, setLockInfo]: any = useState({});
+    const [teamImg, setTeamImg]: any = useState("https://dotatrashblob.blob.core.windows.net/avatars/team-null.png");
 
     const name = JSON.parse(localStorage.getItem('discord-user')!).id;
     //console.log(name);
@@ -182,6 +183,7 @@ function TeamPage() {
                         setItems(result);
                         result.sort((a: RosterListing, b: RosterListing) => { return a.FantasyRole - b.FantasyRole; });
                         setTeamName(result[0].TeamName);
+                        setTeamImg("https://dotatrashblob.blob.core.windows.net/avatars/team-" + result[0].TeamName + ".png");
                     }
                     else {
                         setTeamName("N/A - Empty Team");
@@ -192,7 +194,8 @@ function TeamPage() {
                     setError(error.message);
                     setModalIsOpen(true);
                 }
-            );
+        );
+
     }, [name]);
 
     if (!isLoaded) {
@@ -213,6 +216,12 @@ function TeamPage() {
                 <PageWrapper>
                     <div className="col-start-3 col-end-7 flex flex-col">
                         <ContentPanel>
+                            <div className="w-2/5 pb-4">
+                                <img src={teamImg} alt="" onError={({ currentTarget }) => {
+                                    currentTarget.onerror = null; // prevents looping
+                                    currentTarget.src = "https://dotatrashblob.blob.core.windows.net/avatars/team-null.png";
+                                }} className="bg-stone-600 shadow-lg rounded-xl" />
+                            </div>
                             <div className="">Manage Team - {teamName}</div>
                             <div className="py-4">Roster is: {lockInfo.Value} - Roster will {(lockInfo.Value !== "OPEN")? "unlock" : "lock"} at {(lockInfo.Value !== "OPEN")? lockInfo.End : lockInfo.Start} PT</div>
                             <div className="flex-auto py-4">

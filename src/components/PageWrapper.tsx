@@ -15,7 +15,7 @@ function PageWrapper(props: any) {
                 <div className="flex-auto min-h-4"></div>
                 <footer className="relative xl:grid xl:grid-cols-8 flex-none max-h-12  p-2 px-10">
                     <div className="flex col-start-3 col-end-7">
-                        <div className="font-medium text-stone-500 dark:text-stone-300 flex-auto">&copy;2022 PastPrimeGames</div>
+                        <div className="font-medium text-stone-500 dark:text-stone-300 flex-auto">&copy;2023 PastPrimeGames</div>
                         <div className="flex-none px-2">
                             <a href="https://github.com/EnrgyzerBunny/trash-react/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D">
                                 <svg className="h-18 w-18 text-stone-500 dark:text-stone-300  fill-stone-500 dark:fill-stone-300" height={18} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
