@@ -295,7 +295,7 @@ function TeamPage() {
 
                             </div>
                             <div className="">Manage Team - {teamName}</div>
-                            <div className="py-4">Roster is: {lockInfo.Value} - Roster will {(lockInfo.Value !== "OPEN") ? "unlock" : "lock"} at {(lockInfo.Value !== "OPEN") ? lockInfo.End : lockInfo.Start} PT</div>
+                            <div className="py-4">Roster is: {(lockInfo.End === "FORCED" || lockInfo.Start === "FORCED") ? "FORCED " : ""} {lockInfo.Value} {(lockInfo.End === "FORCED" || lockInfo.Start === "FORCED") ? "" : ("- Roster will " + ((lockInfo.Value !== "OPEN") ? "unlock" : "lock") + " at " + ((lockInfo.Value !== "OPEN") ? lockInfo.End : lockInfo.Start) + " PT")}</div>
                             <div className="flex-auto py-4">
                                 Players:
                             </div>

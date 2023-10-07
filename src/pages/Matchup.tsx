@@ -201,8 +201,23 @@ function MatchupPage() {
 
                     <tbody>
                         <tr key={"row" + teamA.TeamID + "vs" + teamB.TeamID}>
-                            <td key={"teamname-a" + teamA.TeamID} className="w-1/2 px-2 py-2 text-lg">{teamA.TeamName} - {teamA.Points.toFixed(2)}</td>
-                            <td key={"teamname-a" + teamB.TeamID} className="w-1/2 text-right px-2 py-2 text-lg">{teamB.Points.toFixed(2)} - {teamB.TeamName}</td>
+                            <td key={"teamname-a" + teamA.TeamID} className="w-1/2 px-2 py-2 text-lg">
+                                <img src={"https://dotatrashblob.blob.core.windows.net/avatars/team-" + teamA.TeamName + ".png"} alt="" onError={({ currentTarget }) => {
+                                    currentTarget.onerror = null; // prevents looping
+                                    currentTarget.src = "https://dotatrashblob.blob.core.windows.net/avatars/team-null.png";
+                                }} className="bg-stone-600 shadow-lg rounded-xl" />
+                                {teamA.TeamName} - {teamA.Points.toFixed(2)}
+                            </td>
+                            <td key={"teamname-a" + teamB.TeamID} className="w-1/2 text-right px-2 py-2 text-lg">
+                                <div className="flex">
+                                    <div className="flex-auto"></div>
+                                    <img src={"https://dotatrashblob.blob.core.windows.net/avatars/team-" + teamB.TeamName + ".png"} alt="" onError={({ currentTarget }) => {
+                                        currentTarget.onerror = null; // prevents looping
+                                        currentTarget.src = "https://dotatrashblob.blob.core.windows.net/avatars/team-null.png";
+                                    }} className="bg-stone-600 shadow-lg rounded-xl" />
+                                </div>
+                                {teamB.Points.toFixed(2)} - {teamB.TeamName}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -269,7 +284,7 @@ function MatchupPage() {
                 (result) => {
 
                     var playerRows = result.Rows;
-                    if (playerRows.length > 0) {
+                    if (playerRows && playerRows.length > 0) {
                         var compiled: any = [];
                         var hashed: any = [];
                         for (var i = 0; i < playerRows.length; i++) {

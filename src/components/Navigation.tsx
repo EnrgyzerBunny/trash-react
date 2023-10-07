@@ -10,16 +10,16 @@ function Navigation() {
     [ //if auth
         ['Home', '/'],
         ['Team', '/team'],
-        //['Matchup', '/matchup'],
-        //['Groups', '/groups'],
+        ['Matchup', '/matchup'],
+        ['Groups', '/groups'],
         ['Players', '/players'],
         //['Schedule', '/schedule'],
     ]
     :
     [ //if unauth
         ['Home', '/'],
-        //['Matchup', '/matchup'],
-        //['Groups', '/groups'],
+        ['Matchup', '/matchup'],
+        ['Groups', '/groups'],
         ['Players', '/players'],
         //['Schedule', '/schedule'],
     ];
