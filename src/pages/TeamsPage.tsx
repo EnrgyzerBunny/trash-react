@@ -84,7 +84,7 @@ function TeamDetails() {
                                 <img src={teamImg} alt="" onError={({ currentTarget }) => {
                                     currentTarget.onerror = null; // prevents looping
                                     currentTarget.src = "https://dotatrashblob.blob.core.windows.net/avatars/team-null.png";
-                                }} className="bg-stone-600 shadow-lg rounded-xl" />
+                                }} className="bg-stone-600 shadow-lg rounded-xl max-w-[200px] max-h-[200px]" />
                             </div>
                             <div className="font-bold text-xl py-4">
                                 {teamName}
