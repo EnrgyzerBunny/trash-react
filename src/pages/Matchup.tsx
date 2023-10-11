@@ -214,7 +214,7 @@ function MatchupPage() {
                                     <img src={"https://dotatrashblob.blob.core.windows.net/avatars/team-" + teamB.TeamName + ".png"} alt="" onError={({ currentTarget }) => {
                                         currentTarget.onerror = null; // prevents looping
                                         currentTarget.src = "https://dotatrashblob.blob.core.windows.net/avatars/team-null.png";
-                                    }} className="bg-stone-600 shadow-lg rounded-xl" />
+                                    }} className="bg-stone-600 shadow-lg rounded-xl max-w-[200px] max-h-[200px]" />
                                 </div>
                                 {teamB.Points.toFixed(2)} - {teamB.TeamName}
                             </td>
