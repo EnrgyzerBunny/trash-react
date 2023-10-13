@@ -208,7 +208,7 @@ function MatchupPage() {
                                 }} className="bg-stone-600 shadow-lg rounded-xl max-w-[200px] max-h-[200px]" />
                                 {teamA.TeamName} - {teamA.Points.toFixed(2)}
                             </td>
-                            <td key={"teamname-a" + teamB.TeamID} className="w-1/2 text-right px-2 py-2 text-lg">
+                            <td key={"teamname-b" + teamB.TeamID} className="w-1/2 text-right px-2 py-2 text-lg">
                                 <div className="flex">
                                     <div className="flex-auto"></div>
                                     <img src={"https://dotatrashblob.blob.core.windows.net/avatars/team-" + teamB.TeamName + ".png"} alt="" onError={({ currentTarget }) => {
@@ -223,7 +223,7 @@ function MatchupPage() {
                 </table>
                 <table className="flex-auto table-auto w-full border-collapse border border-stone-500">
                     <thead>
-                        <tr>
+                        <tr key={"row-headers" + teamA.TeamID + "vs" + teamB.TeamID}>
                             <th className=" border border-stone-600 bg-stone-600 text-sm">Player</th>
                             <th className=" border border-stone-600 bg-stone-600 text-sm">Team</th>
                             <th className=" border border-stone-600 bg-stone-600 text-sm">Games</th>
@@ -243,7 +243,7 @@ function MatchupPage() {
                                 </td>
                                 <td key={"team-a" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(item.PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{item.ProTeamTag}</td>
                                 <td key={"points-a" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(item.PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{item["Result Rows"]}</td>
-                                <td key={"rows-a" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(item.PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{item.Points}</td>
+                                <td key={"rows-a" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(item.PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{Number(item.Points).toFixed(2)}</td>
                                 <td key={"vs" + item.PlayerID} className="border w-1/12 text-center px-2 py-2 border-stone-600 bg-stone-600 font-normal text-sm">
                                     {(item.FantasyRole !== -1) ?
                                         <div className='flex'>
@@ -261,7 +261,7 @@ function MatchupPage() {
                                         </div>
                                     }
                                 </td>
-                                <td key={"rows-b" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(teamB.Players[i].PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{teamB.Players[i].Points}</td>
+                                <td key={"rows-b" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(teamB.Players[i].PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{Number(teamB.Players[i].Points).toFixed(2)}</td>
                                 <td key={"points-b" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(teamB.Players[i].PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{teamB.Players[i]["Result Rows"]}</td>
                                 <td key={"team-b" + item.PlayerID} className={`border w-1/12 text-center px-2 py-2 border-stone-600 font-normal text-sm ${(teamB.Players[i].PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>{teamB.Players[i].ProTeamTag}</td>
                                 <td key={"name-b" + item.PlayerID} className={`border w-2/12 px-2 py-2 border-stone-600 font-normal text-sm ${(teamB.Players[i].PlayStatus === 1) ? '' : ' bg-stone-400 opacity-70'}`}>
@@ -372,7 +372,7 @@ function MatchupPage() {
                     <ContentPanel>
 
                         <div className="pt-6">Current Matchups - Starting {new Date(Date.parse(matchups[0].Date)).toDateString()} {new Date(Date.parse(matchups[0].Date)).toLocaleTimeString()}</div>
-                        <RecentConsumedMatches date={new Date(Date.parse(matchups[0].Date) - 25200000).toISOString()} />
+                        <RecentConsumedMatches date={new Date(Date.parse(matchups[0].Date) - 14400000).toISOString()} />
                         {matchups.map((item: any, i: any) => (
                             <div className='pb-6'>
                                 {UserMatchup(i)}
