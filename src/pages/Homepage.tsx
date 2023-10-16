@@ -44,7 +44,7 @@ function Homepage() {
                     {/* <button onClick={() => setIsLightboxOpen(true)}><img className='bg-stone-600 shadow-lg' alt="Group Stage Bracket" src={MainEventBracket}></img></button>*/}
                     {/*    <div className='font-thin text-xs'>Click to enlarge</div>*/}
                     {/*</ContentPanel>*/}
-                    {/*<WaiverPriority />*/}
+                    <WaiverPriority />
                     <FeaturedPlayer />
                     <ContentPanel>
                         <TeamsTable />
