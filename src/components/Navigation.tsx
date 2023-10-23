@@ -11,7 +11,7 @@ function Navigation() {
         ['Home', '/'],
         ['Team', '/team'],
         ['Matchup', '/matchup'],
-        ['Groups', '/groups'],
+        //['Groups', '/groups'],
         ['Players', '/players'],
         //['Schedule', '/schedule'],
     ]
@@ -19,7 +19,7 @@ function Navigation() {
     [ //if unauth
         ['Home', '/'],
         ['Matchup', '/matchup'],
-        ['Groups', '/groups'],
+        //['Groups', '/groups'],
         ['Players', '/players'],
         //['Schedule', '/schedule'],
     ];
