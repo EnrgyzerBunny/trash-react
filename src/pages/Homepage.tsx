@@ -15,25 +15,25 @@ function Homepage() {
     const [styleTrans, setStyleTrans]: any = useState({});
     const [isLightboxOpen, setIsLightboxOpen]: any = useState(false);
 
-    //const dismissCallback = (height: number) => {
-    //    setClassTrans("col-start-3 col-end-7 flex flex-col transition ease-in-out duration-700");
-    //    const newStyle = {
-    //        "--tw-translate-y": "-" + height + "px",
-    //        "transform": "translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))"
-    //    };
-    //    setStyleTrans(newStyle);
-    //};
+    const dismissCallback = (height: number) => {
+        setClassTrans("col-start-3 col-end-7 flex flex-col transition ease-in-out duration-700");
+        const newStyle = {
+            "--tw-translate-y": "-" + height + "px",
+            "transform": "translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))"
+        };
+        setStyleTrans(newStyle);
+    };
 
-    //const reset = () => {
-    //    setClassTrans("col-start-3 col-end-7 flex flex-col");
-    //    setStyleTrans({});
-    //};
+    const reset = () => {
+        setClassTrans("col-start-3 col-end-7 flex flex-col");
+        setStyleTrans({});
+    };
 
 
     return (
         <>
             <PageWrapper>
-                {/*<WinnerBanner season="5" team="2018 Fantasy Baseball Champion" onDismiss={dismissCallback} onFinish={reset} />*/}
+                <WinnerBanner season="6" team="2022 Fantasy Dota Champion" onDismiss={dismissCallback} onFinish={reset} />
 
                 <div style={styleTrans} className={classTrans}>
                     {/*<ContentPanel>
@@ -44,8 +44,8 @@ function Homepage() {
                     {/* <button onClick={() => setIsLightboxOpen(true)}><img className='bg-stone-600 shadow-lg' alt="Group Stage Bracket" src={MainEventBracket}></img></button>*/}
                     {/*    <div className='font-thin text-xs'>Click to enlarge</div>*/}
                     {/*</ContentPanel>*/}
-                    <WaiverPriority />
-                    <FeaturedPlayer />
+                    {/*<WaiverPriority />*/}
+                    {/*<FeaturedPlayer />*/}
                     {/*<ContentPanel>*/}
                     {/*    <TeamsTable />*/}
                     {/*</ContentPanel>*/}
