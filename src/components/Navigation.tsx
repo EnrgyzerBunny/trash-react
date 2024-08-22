@@ -9,18 +9,18 @@ function Navigation() {
     var navItems = IsAuth()? 
     [ //if auth
         ['Home', '/'],
-        //['Team', '/team'],
+        ['Team', '/team'],
         //['Matchup', '/matchup'],
-        //['Groups', '/groups'],
-        //['Players', '/players'],
+        ['Groups', '/groups'],
+        ['Players', '/players'],
         //['Schedule', '/schedule'],
     ]
     :
     [ //if unauth
         ['Home', '/'],
         //['Matchup', '/matchup'],
-        //['Groups', '/groups'],
-        //['Players', '/players'],
+        ['Groups', '/groups'],
+        ['Players', '/players'],
         //['Schedule', '/schedule'],
     ];
 

@@ -109,7 +109,7 @@ function FeaturedPlayer(props: any) {
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div className="text-base">
+                                                    <div className="text-base px-4">
                                                         {(player.TeamName != null) ?
                                                             <Link to={"/teams/" + player.FantasyTeamID}>
 

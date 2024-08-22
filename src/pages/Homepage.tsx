@@ -45,13 +45,13 @@ function Homepage() {
                     {/*    <div className='font-thin text-xs'>Click to enlarge</div>*/}
                     {/*</ContentPanel>*/}
                     {/*<WaiverPriority />*/}
-                    {/*<FeaturedPlayer />*/}
-                    {/*<ContentPanel>*/}
-                    {/*    <TeamsTable />*/}
-                    {/*</ContentPanel>*/}
+                    <FeaturedPlayer />
                     <ContentPanel>
-                        <iframe className="shadow-lg" src="https://challonge.com/l4pned5s/module" width="100%" height="1000" frameBorder={0} scrolling="auto" allowTransparency={true}></iframe>
+                        <TeamsTable />
                     </ContentPanel>
+                    {/*<ContentPanel>*/}
+                    {/*<iframe className="shadow-lg" src="https://challonge.com/l4pned5s/module" width="100%" height="1000" frameBorder={0} scrolling="auto" allowTransparency={true}></iframe>*/}
+                    {/*</ContentPanel>*/}
 
                 </div>
             </PageWrapper>
