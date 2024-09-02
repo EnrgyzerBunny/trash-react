@@ -33,8 +33,9 @@ function Homepage() {
     return (
         <>
             <PageWrapper>
+                {/* 
                 <WinnerBanner season="6" team="2022 Fantasy Dota Champion" onDismiss={dismissCallback} onFinish={reset} />
-
+                */}
                 <div style={styleTrans} className={classTrans}>
                     {/*<ContentPanel>
                     <img className='bg-stone-600 shadow-lg' alt="Group Stage Bracket" src={GroupStageBracket}></img>
@@ -44,14 +45,14 @@ function Homepage() {
                     {/* <button onClick={() => setIsLightboxOpen(true)}><img className='bg-stone-600 shadow-lg' alt="Group Stage Bracket" src={MainEventBracket}></img></button>*/}
                     {/*    <div className='font-thin text-xs'>Click to enlarge</div>*/}
                     {/*</ContentPanel>*/}
-                    {/*<WaiverPriority />*/}
+                    <WaiverPriority />
                     <FeaturedPlayer />
                     <ContentPanel>
                         <TeamsTable />
                     </ContentPanel>
-                    {/*<ContentPanel>*/}
-                    {/*<iframe className="shadow-lg" src="https://challonge.com/l4pned5s/module" width="100%" height="1000" frameBorder={0} scrolling="auto" allowTransparency={true}></iframe>*/}
-                    {/*</ContentPanel>*/}
+                    <ContentPanel>
+                        <iframe className="shadow-lg" src="https://challonge.com/rh9hicbu/module" width="100%" height="1000" frameBorder={0} scrolling="auto" allowTransparency={true}></iframe>
+                    </ContentPanel>
 
                 </div>
             </PageWrapper>
