@@ -47,9 +47,9 @@ function Homepage() {
                     {/*</ContentPanel>*/}
                     <WaiverPriority />
                     <FeaturedPlayer />
-                    <ContentPanel>
-                        <TeamsTable />
-                    </ContentPanel>
+                    {/*<ContentPanel>*/}
+                    {/*    <TeamsTable />*/}
+                    {/*</ContentPanel>*/}
                     <ContentPanel>
                         <iframe className="shadow-lg" src="https://challonge.com/rh9hicbu/module" width="100%" height="1000" frameBorder={0} scrolling="auto" allowTransparency={true}></iframe>
                     </ContentPanel>
